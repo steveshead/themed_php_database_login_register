@@ -258,14 +258,14 @@ if (isset($_POST['x'])) {
                                 ?>
                                 <input type="hidden" value="<?= $src ?>" name="src" />
                                 <div class="d-grid gap-2">
-                                    <input class="btn btn-success" type="submit" value="Save Image" />
+                                    <input class="btn btn-lg btn-success" type="submit" value="Crop Image" />
                                 </div>
                             </form>
                         </div>
                         <div id="CropImageForm2">
                             <form action="avatar.php" method="post" onsubmit="return cancelCrop();">
                                 <div class="d-grid gap-2">
-                                    <input class="btn btn-primary my-2" type="submit" value="Cancel Crop" />
+                                    <input class="btn btn-lg btn-primary my-2" type="submit" value="Cancel Crop" />
                                 </div>
                             </form>
                         </div>

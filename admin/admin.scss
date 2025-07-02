@@ -1,4 +1,4 @@
-$font: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+$font: system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 $font-size: 16px;
 $header-size: 55px;
 $aside-width: 260px;
@@ -28,6 +28,8 @@ body {
 	color: $text-color;
     background-color: $background-color;
 	margin: 0;
+	font-family: "Helvetica Neue" !important;
+	font-weight: lighter !important;
 }
 h1, h2, h3, h4, h5 {
 	color: $header-color;
