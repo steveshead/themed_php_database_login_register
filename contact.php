@@ -65,16 +65,16 @@ if (isset($_POST['submit'])) {
                     <?=$msg?>
 
                     <div class="mb-3">
-                        <input class="form-control py-2 px-3 bg-light border-0" type="text" name="name" id="name" placeholder="Name" value="<?= isset($_POST['name']) ? htmlspecialchars($_POST['name'], ENT_QUOTES) : '' ?>"/>
+                        <input class="form-control py-2 px-3 bg-light border" type="text" name="name" id="name" placeholder="Name" value="<?= isset($_POST['name']) ? htmlspecialchars($_POST['name'], ENT_QUOTES) : '' ?>"/>
                     </div>
                     <div class="mb-3">
-                        <input class="form-control py-2 px-3 bg-light border-0" type="email" name="email" id="email" placeholder="Email Address" value="<?= isset($_POST['email']) ? htmlspecialchars($_POST['email'], ENT_QUOTES) : '' ?>" />
+                        <input class="form-control py-2 px-3 bg-light border" type="email" name="email" id="email" placeholder="Email Address" value="<?= isset($_POST['email']) ? htmlspecialchars($_POST['email'], ENT_QUOTES) : '' ?>" />
                     </div>
                     <div class="mb-3">
-                        <input class="form-control py-2 px-3 bg-light border-0" type="text" name="subject" id="subject" placeholder="Subject" value="<?= isset($_POST['subject']) ? htmlspecialchars($_POST['subject'], ENT_QUOTES) : '' ?>"/>
+                        <input class="form-control py-2 px-3 bg-light border" type="text" name="subject" id="subject" placeholder="Subject" value="<?= isset($_POST['subject']) ? htmlspecialchars($_POST['subject'], ENT_QUOTES) : '' ?>"/>
                     </div>
                     <div class="mb-3">
-                        <textarea class="form-control py-2 px-3 bg-light border-0" name="message" id="message" type="text" placeholder="Your Message" style="height:130px;"><?= isset($_POST['message']) ? htmlspecialchars($_POST['message'], ENT_QUOTES) : '' ?></textarea>
+                        <textarea class="form-control py-2 px-3 bg-light border" name="message" id="message" type="text" placeholder="Your Message" style="height:130px;"><?= isset($_POST['message']) ? htmlspecialchars($_POST['message'], ENT_QUOTES) : '' ?></textarea>
                     </div>
                     <div class="d-flex justify-content-between">
                         <input class="btn btn-primary" type="submit" name="submit" value="Send Message" />

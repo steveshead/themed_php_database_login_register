@@ -42,8 +42,8 @@ if (isset($_POST['username'], $_POST['npassword'], $_POST['cpassword'], $_POST['
 			// If email has changed, generate a new activation code
 			$activation_code = account_activation && $account['email'] != $_POST['email'] ? hash('sha256', uniqid() . $_POST['email'] . secret_key) : $account['activation_code'];
 			// Update the account
-			$stmt = $pdo->prepare('UPDATE accounts SET first_name = ?, last_name = ?, username = ?, password = ?, email = ?, occupation = ?, location = ?, activation_code = ? WHERE id = ?');
-			$stmt->execute([ $_POST['first_name'], $_POST['last_name'], $_POST['username'], $password, $_POST['email'], $_POST['occupation'], $_POST['location'], $activation_code, $_SESSION['account_id'] ]);
+			$stmt = $pdo->prepare('UPDATE accounts SET first_name = ?, last_name = ?, username = ?, password = ?, email = ?, occupation = ?, motto = ?, location = ?, activation_code = ? WHERE id = ?');
+			$stmt->execute([ $_POST['first_name'], $_POST['last_name'], $_POST['username'], $password, $_POST['email'], $_POST['occupation'], $_POST['motto'], $_POST['location'], $activation_code, $_SESSION['account_id'] ]);
 			// Update the session variables
 			$_SESSION['account_name'] = $_POST['username'];
 			// If email has changed, logout the user and send a new activation email
@@ -74,9 +74,9 @@ if (isset($_POST['username'], $_POST['npassword'], $_POST['cpassword'], $_POST['
                     <div class="text-center">
                         <h2 class="fw-light mb-4">User Details</h2>
                         <img src="<?= !empty($account['avatar']) ? htmlspecialchars($account['avatar'], ENT_QUOTES) : '/images/avatar/default_avatar.png' ?>" class="rounded-circle img-fluid" style="width: 150px;">
-                        <h5 class="my-3"><?= htmlspecialchars($account['first_name'], ENT_QUOTES) ?> <?= htmlspecialchars($account['last_name'], ENT_QUOTES) ?></h5>
-                        <p class="text-muted mb-1"><?= htmlspecialchars($account['occupation'], ENT_QUOTES)?></p>
-                        <p class="text-muted mb-4"><?= htmlspecialchars($account['location'], ENT_QUOTES)?></p>
+                        <h1 class="my-3 fw-light"><?= htmlspecialchars($account['first_name'], ENT_QUOTES) ?> <?= htmlspecialchars($account['last_name'], ENT_QUOTES) ?></h1>
+                        <h3 class="text-muted mb-1 fw-light"><?= htmlspecialchars($account['occupation'], ENT_QUOTES)?></h3>
+                        <p class="text-muted mb-4 fst-italic"><?= htmlspecialchars($account['motto'], ENT_QUOTES)?></p>
                         <div class="d-flex justify-content-center mb-2">
                             <a class="btn btn-primary me-1" href="?action=edit">Edit Profile</a>
                             <a href="logout.php" type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-primary ms-1">Logout</a>
@@ -125,6 +125,15 @@ if (isset($_POST['username'], $_POST['npassword'], $_POST['cpassword'], $_POST['
                                 <p class="text-muted mb-0"><?= htmlspecialchars($account['occupation'], ENT_QUOTES)?></p>
                             </div>
                         </div>
+
+                    <div class="row mb-2">
+                        <div class="col-sm-4">
+                            <p class="mb-0"><strong>Motto</strong></p>
+                        </div>
+                        <div class="col-sm-8">
+                            <p class="text-muted mb-0"><?= htmlspecialchars($account['motto'], ENT_QUOTES)?></p>
+                        </div>
+                    </div>
                         <div class="row mb-2">
                             <div class="col-sm-4">
                                 <p class="mb-0"><strong>Location</strong></p>
@@ -202,6 +211,11 @@ if (isset($_POST['username'], $_POST['npassword'], $_POST['cpassword'], $_POST['
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="occupation">Occupation</span>
                         <input class="form-control" type="text" name="occupation" placeholder="Occupation" id="occupation" value="<?=htmlspecialchars($account['occupation'], ENT_QUOTES)?>">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="motto">Motto</span>
+                        <input class="form-control" type="text" name="motto" placeholder="Motto" id="motto" value="<?=htmlspecialchars($account['motto'], ENT_QUOTES)?>">
                     </div>
 
                     <div class="input-group mb-3">

@@ -35,7 +35,7 @@ if (isset($_POST['submit'])) {
 }
 ?>
       <section>
-        <div class="container pb-5">
+        <div class="container py-5">
           <div class="row">
             <div class="col-12 col-lg-6 mx-auto text-center text-lg-start">
               <div class="col-md-8 col-lg-10 mx-auto mx-lg-0 pt-lg-5 pb-4">
@@ -329,17 +329,17 @@ if (isset($_POST['submit'])) {
                         <div class="row">
                       <div class="col-12 col-lg-6 mb-3">
                         <div class="mb-3">
-                            <input class="form-control py-2 px-3 bg-light border-0" type="text" name="subject" id="subject" placeholder="Subject" value="<?= isset($_POST['subject']) ? htmlspecialchars($_POST['subject'], ENT_QUOTES) : '' ?>"/>
+                            <input class="form-control py-2 px-3 bg-light border" type="text" name="subject" id="subject" placeholder="Subject" value="<?= isset($_POST['subject']) ? htmlspecialchars($_POST['subject'], ENT_QUOTES) : '' ?>"/>
                         </div>
                         <div class="mb-3">
-                            <input class="form-control py-2 px-3 bg-light border-0" type="text" name="name" id="name" placeholder="Name" value="<?= isset($_POST['name']) ? htmlspecialchars($_POST['name'], ENT_QUOTES) : '' ?>"/>
+                            <input class="form-control py-2 px-3 bg-light border" type="text" name="name" id="name" placeholder="Name" value="<?= isset($_POST['name']) ? htmlspecialchars($_POST['name'], ENT_QUOTES) : '' ?>"/>
                         </div>
                         <div class="mb-3">
-                            <input class="form-control py-2 px-3 bg-light border-0" type="email" name="email" id="email" placeholder="Email Address" value="<?= isset($_POST['email']) ? htmlspecialchars($_POST['email'], ENT_QUOTES) : '' ?>" />
+                            <input class="form-control py-2 px-3 bg-light border" type="email" name="email" id="email" placeholder="Email Address" value="<?= isset($_POST['email']) ? htmlspecialchars($_POST['email'], ENT_QUOTES) : '' ?>" />
                         </div>
                       </div>
                       <div class="col-12 col-lg-6 mb-3">
-                          <textarea class="form-control py-2 px-3 bg-light border-0 h-100" style="resize: none;" name="message" id="message" type="text" placeholder="Your Message" style="height:130px;"><?= isset($_POST['message']) ? htmlspecialchars($_POST['message'], ENT_QUOTES) : '' ?></textarea>
+                          <textarea class="form-control py-2 px-3 bg-light border h-100" style="resize: none;" name="message" id="message" type="text" placeholder="Your Message" style="height:130px;"><?= isset($_POST['message']) ? htmlspecialchars($_POST['message'], ENT_QUOTES) : '' ?></textarea>
                       </div>
                     </div>
                     <div class="d-flex justify-content-between">

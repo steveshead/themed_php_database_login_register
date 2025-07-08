@@ -43,6 +43,7 @@ CREATE TABLE `accounts` (
   `registered` datetime NOT NULL,
   `avatar` varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `occupation` text COLLATE utf8mb4_unicode_ci,
+  `motto` varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `location` text COLLATE utf8mb4_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -50,7 +51,7 @@ CREATE TABLE `accounts` (
 -- Dumping data for table `accounts`
 --
 
-INSERT INTO `accounts` (`id`, `username`, `first_name`, `last_name`, `password`, `email`, `role`, `approved`, `activation_code`, `remember_me_code`, `reset_code`, `last_seen`, `registered`, `avatar`, `occupation`, `location`) VALUES
+INSERT INTO `accounts` (`id`, `username`, `first_name`, `last_name`, `password`, `email`, `role`, `approved`, `activation_code`, `remember_me_code`, `reset_code`, `last_seen`, `registered`, `avatar`, `occupation`, `motto`, `location`) VALUES
 (1, 'admin', NULL, NULL, '$2y$10$ZU7Jq5yZ1U/ifeJoJzvLbenjRyJVkSzmQKQc.X0KDPkfR3qs/iA7O', 'admin@example.com', 'Admin', 1, 'activated', '', NULL, '2025-06-01 21:25:38', '2025-01-01 00:00:00', NULL, NULL, NULL),
 (2, 'member', NULL, NULL, '$2y$10$yWKu95tLTnqdNhR/XfHtEekrjKJg2iVa8p65Da/EoijSPaFkRnmRG', 'member@example.com', 'Member', 1, 'activated', '$2y$10$4U3BaM.Xmvz1xI.12l9mEedOs3ffV9rrsIHSC1oDwO7cnpQPxHl.O', NULL, '2025-06-07 19:25:49', '2025-01-01 00:00:00', NULL, NULL, NULL);
 
