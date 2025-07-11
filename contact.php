@@ -60,7 +60,7 @@ if (isset($_POST['submit'])) {
                 </div>
             </div>
             <div class="col-12 col-lg-6">
-                <h2 class="fs-1 fw-bold py-4">Contact Form</h2>
+                <h2 class="fs-1 fw-bold py-4">Send Us A Message</h2>
                 <form class="form" method="post" action="contact.php">
                     <?=$msg?>
 
