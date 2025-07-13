@@ -27,15 +27,20 @@ if (isset($_GET['code']) && !empty($_GET['code'])) {
 }
 ?>
 
-		<div class="login">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-6 offset-3">
+                <h1>Activate Account</h1>
 
-			<h1>Activate Account</h1>
+                <div class="form register-form">
 
-			<div class="form register-form">
+                    <div class="alert alert-success">
+                        <?=$success_msg?>
+                    </div>
 
-				<div class="msg success">
-					<?=$success_msg?>
-				</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-			</div>
 <?= require 'footer.php'; ?>

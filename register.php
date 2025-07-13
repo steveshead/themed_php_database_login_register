@@ -33,9 +33,9 @@ if (isset($_COOKIE['remember_me']) && !empty($_COOKIE['remember_me'])) {
 }
 ?>
 
-<div class="container">
+<div class="container py-5">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="register">
                 <div class="icon">
                     <!-- You could add your own site logo or icon here -->
@@ -44,35 +44,39 @@ if (isset($_COOKIE['remember_me']) && !empty($_COOKIE['remember_me'])) {
                 <h1>Member Register</h1>
                 <form action="register-process.php" method="post" class="form register-form">
 
-                    <label class="form-label" for="username">Username</label>
-                    <div class="form-group">
-                        <svg class="form-icon-left" width="14" height="14" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
-                        <input class="form-input" type="text" name="username" placeholder="Username" id="username" required>
+                    <div class="mb-3 input-group">
+                        <input class="form-control" type="text" name="username" placeholder="Enter Your Username" id="username" required/>
+                        <span class="input-group-text">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                          </span>
                     </div>
 
-                    <label class="form-label" for="password">Password</label>
-                    <div class="form-group">
-                        <svg class="form-icon-left" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"/></svg>
-                        <input class="form-input" type="password" name="password" placeholder="Password" id="password" required>
+                    <div class="mb-3 input-group">
+                        <input type="password" class="form-control"  name="password" placeholder="Enter your password" id="password" required/>
+                        <div class="input-group-text">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 22 22" fill="none" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                        </div>
                     </div>
 
-                    <label class="form-label" for="cpassword">Confirm Password</label>
-                    <div class="form-group">
-                        <svg class="form-icon-left" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"/></svg>
-                        <input class="form-input" type="password" name="cpassword" placeholder="Confirm Password" id="cpassword" required>
+                    <div class="mb-3 input-group">
+                        <input type="password" class="form-control"  name="cpassword" placeholder="Confirm password" id="cpassword" required/>
+                        <div class="input-group-text">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 22 22" fill="none" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                        </div>
                     </div>
 
-                    <label class="form-label" for="email">Email</label>
-                    <div class="form-group mar-bot-5">
-                        <svg class="form-icon-left" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg>
-                        <input class="form-input" type="email" name="email" placeholder="Email" id="email" required>
+                    <div class="mb-3 input-group">
+                        <input class="form-control" type="email" name="email" placeholder="Email Address" id="email" required/>
+                        <span class="input-group-text">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                          </span>
                     </div>
 
-                    <div class="msg"></div>
+                    <div class="msg mb-2"></div>
 
-                    <button class="btn blue" type="submit">Register</button>
+                    <button class="btn btn-primary mb-2" type="submit">Register</button>
 
-                    <p class="register-link">Already have an account? <a href="index.php" class="form-link">Login</a></p>
+                    <p class="register-link">Already have an account? <a href="index.php" class="form-link">Login Here</a></p>
 
                 </form>
 

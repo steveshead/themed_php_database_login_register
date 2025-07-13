@@ -33,6 +33,12 @@ if (isset($_POST['submit'])) {
         }
     }
 }
+
+if (isset($_SESSION['first_name'])) {
+    $welcome = $_SESSION['first_name'];
+} elseif (isset($_SESSION['account_name'])) {
+    $welcome = $_SESSION['account_name'];
+}
 ?>
       <section>
         <div class="container py-5">
@@ -40,13 +46,13 @@ if (isset($_POST['submit'])) {
             <div class="col-12 col-lg-6 mx-auto text-center text-lg-start">
               <div class="col-md-8 col-lg-10 mx-auto mx-lg-0 pt-lg-5 pb-4">
                 <h2 class="mb-3 fs-1 fw-bold">
-                  <span>Welcome,</span>
-                  <span class="text-primary"><?= $logged_in ? $_SESSION['first_name'] . ' ' . $_SESSION['last_name'] : 'to our website' ?>. </span>
+                  <span>Welcome<?= $logged_in ? ',' : '' ?></span>
+                  <span class="text-primary"><?= $logged_in ? $welcome : 'to our website' ?></span>.
                   <span>We are very happy that you are here!</span>
                 </h2>
                 <p class="pe-lg-5 text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed luctus eget justo et iaculis. Quisque vitae nulla malesuada, auctor arcu vitae, luctus nisi.</p>
               </div>
-              <div><a class="me-2 btn btn-primary" href="#">Check Now</a><a class="btn btn-outline-primary" href="#">Documentation</a></div>
+                <?= $logged_in ? '<div><a class="me-2 btn btn-primary" href="#">Check Now</a><a class="btn btn-outline-primary" href="#">Documentation</a></div>' : '<div><a class="me-2 btn btn-primary" href="login.php">Log In</a><a class="btn btn-outline-primary" href="register.php">Sign Up</a></div>' ?>
             </div>
             <div class="col-12 col-lg-6 mt-5 mt-lg-0">
               <div>
