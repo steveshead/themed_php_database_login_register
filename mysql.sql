@@ -44,7 +44,10 @@ CREATE TABLE `accounts` (
   `avatar` varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `occupation` text COLLATE utf8mb4_unicode_ci,
   `motto` varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `location` text COLLATE utf8mb4_unicode_ci
+  `location` text COLLATE utf8mb4_unicode_ci,
+  `facebook` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `instagram` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `twitter` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
