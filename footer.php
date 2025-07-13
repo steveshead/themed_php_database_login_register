@@ -10,7 +10,7 @@
                 </div>
             </section>
             <div class="container footer">
-                <footer class="py-5">
+                <footer class="pt-5">
                     <div class="row">
                         <div class="col-6 col-md-2 mb-3">
                             <h5>About</h5>
@@ -63,20 +63,20 @@
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top"> <p class="copyright">&copy; Copyright <?=date('Y')?> Company, Inc. All rights reserved.</p>
+                    <div class="d-flex flex-column flex-sm-row justify-content-between pt-4 mt-4 border-top"> <p class="copyright">&copy; Copyright <?=date('Y')?> Company, Inc. All rights reserved.</p>
                         <ul class="list-unstyled d-flex">
                             <li class="ms-3">
-                                <a class="link-body-emphasis" href="#" aria-label="Instagram">
+                                <a class="link-body-emphasis" href="https://www.facebook.com/<?= isset($_SESSION['facebook']) ? htmlspecialchars($_SESSION['facebook'], ENT_QUOTES) : '' ?>" aria-label="Facebook">
                                     <img src="assets/icons/facebook-blue.svg" alt="">
                                 </a>
                             </li>
                             <li class="ms-3">
-                                <a class="link-body-emphasis" href="#" aria-label="Instagram">
+                                <a class="link-body-emphasis" href="https://www.instagram.com/<?= isset($_SESSION['instagram']) ? htmlspecialchars($_SESSION['instagram'], ENT_QUOTES) : '' ?>" aria-label="Instagram">
                                     <img src="assets/icons/instagram-blue.svg" alt="">
                                 </a>
                             </li>
                             <li class="ms-3">
-                                <a class="link-body-emphasis" href="#" aria-label="Instagram">
+                                <a class="link-body-emphasis" href="https://www.x.com/<?= isset($_SESSION['twitter']) ? htmlspecialchars($_SESSION['twitter'], ENT_QUOTES) : '' ?>" aria-label="Twitter">
                                     <img src="assets/icons/twitter-blue.svg" alt="">
                                 </a>
                             </li>

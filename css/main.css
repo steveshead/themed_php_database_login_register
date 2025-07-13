@@ -1,6 +1,6 @@
 
 body {
-  font-family: "Helvetica Neue";
+  font-family: "Helvetica Neue" !important;
 }
 p {
   font-size: 19px !important;

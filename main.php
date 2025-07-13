@@ -37,6 +37,9 @@ function check_loggedin($pdo, $redirect_file = 'index.php') {
     		$_SESSION['account_name'] = $account['username'];
     		$_SESSION['account_id'] = $account['id'];
 			$_SESSION['account_role'] = $account['role'];
+			$_SESSION['facebook'] = $account['facebook'];
+			$_SESSION['instagram'] = $account['instagram'];
+			$_SESSION['twitter'] = $account['twitter'];
 			// Update last seen date
 			$date = date('Y-m-d\TH:i:s');
 			$stmt = $pdo->prepare('UPDATE accounts SET last_seen = ? WHERE id = ?');

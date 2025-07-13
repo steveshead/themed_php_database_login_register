@@ -33,12 +33,6 @@ if (isset($_POST['submit'])) {
         }
     }
 }
-
-if (isset($_SESSION['first_name'])) {
-    $welcome = $_SESSION['first_name'];
-} elseif (isset($_SESSION['account_name'])) {
-    $welcome = $_SESSION['account_name'];
-}
 ?>
       <section>
         <div class="container py-5">

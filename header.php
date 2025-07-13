@@ -7,6 +7,13 @@ $logged_in = isset($_SESSION['account_loggedin']) && $_SESSION['account_loggedin
 // CSS class for nav items that should be hidden when not logged in
 $nav_item_class = !$logged_in ? 'nav-item me-2 display-none' : 'nav-item me-2';
 // Indenting the below code may cause HTML validation errors
+
+$welcome = '';
+if (isset($_SESSION['first_name'])) {
+    $welcome = htmlspecialchars($_SESSION['first_name']);
+} elseif (isset($_SESSION['account_name'])) {
+    $welcome = htmlspecialchars( $_SESSION['account_name']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -44,6 +51,23 @@ $nav_item_class = !$logged_in ? 'nav-item me-2 display-none' : 'nav-item me-2';
                     <a class="btn btn-primary" href="register.php">Sign Up</a>
                 </div>
             </div>
+            <ul class="list-unstyled d-flex align-items-center justify-content-center mb-0">
+                <li class="ms-3">
+                    <a class="link-body-emphasis" href="https://www.facebook.com/<?= isset($_SESSION['facebook']) ? htmlspecialchars($_SESSION['facebook'], ENT_QUOTES) : '' ?>" aria-label="Facebook">
+                        <img src="assets/icons/facebook-blue.svg" alt="">
+                    </a>
+                </li>
+                <li class="ms-3">
+                    <a class="link-body-emphasis" href="https://www.instagram.com/<?= isset($_SESSION['instagram']) ? htmlspecialchars($_SESSION['instagram'], ENT_QUOTES) : '' ?>" aria-label="Instagram">
+                        <img src="assets/icons/instagram-blue.svg" alt="">
+                    </a>
+                </li>
+                <li class="ms-3">
+                    <a class="link-body-emphasis" href="https://www.x.com/<?= isset($_SESSION['twitter']) ? htmlspecialchars($_SESSION['twitter'], ENT_QUOTES) : '' ?>" aria-label="Twitter">
+                        <img src="assets/icons/twitter-blue.svg" alt="">
+                    </a>
+                </li>
+            </ul>
         </nav>
     </div>
 </header>

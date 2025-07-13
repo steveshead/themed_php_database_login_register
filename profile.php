@@ -42,8 +42,8 @@ if (isset($_POST['username'], $_POST['npassword'], $_POST['cpassword'], $_POST['
 			// If email has changed, generate a new activation code
 			$activation_code = account_activation && $account['email'] != $_POST['email'] ? hash('sha256', uniqid() . $_POST['email'] . secret_key) : $account['activation_code'];
 			// Update the account
-			$stmt = $pdo->prepare('UPDATE accounts SET first_name = ?, last_name = ?, username = ?, password = ?, email = ?, occupation = ?, motto = ?, location = ?, activation_code = ? WHERE id = ?');
-			$stmt->execute([ $_POST['first_name'], $_POST['last_name'], $_POST['username'], $password, $_POST['email'], $_POST['occupation'], $_POST['motto'], $_POST['location'], $activation_code, $_SESSION['account_id'] ]);
+			$stmt = $pdo->prepare('UPDATE accounts SET first_name = ?, last_name = ?, username = ?, password = ?, email = ?, occupation = ?, motto = ?, location = ?, facebook = ?, instagram = ?, twitter = ?, activation_code = ? WHERE id = ?');
+			$stmt->execute([ $_POST['first_name'], $_POST['last_name'], $_POST['username'], $password, $_POST['email'], $_POST['occupation'], $_POST['motto'], $_POST['location'], $_POST['facebook'], $_POST['instagram'], $_POST['twitter'], $activation_code, $_SESSION['account_id'] ]);
 			// Update the session variables
 			$_SESSION['account_name'] = $_POST['username'];
 			// If email has changed, logout the user and send a new activation email
@@ -74,9 +74,26 @@ if (isset($_POST['username'], $_POST['npassword'], $_POST['cpassword'], $_POST['
                     <div class="text-center">
                         <h2 class="fw-light mb-4">User Details</h2>
                         <img src="<?= !empty($account['avatar']) ? htmlspecialchars($account['avatar'], ENT_QUOTES) : '/images/avatar/default_avatar.png' ?>" class="rounded-circle img-fluid" style="width: 150px;">
-                        <h1 class="my-3 fw-light"><?= htmlspecialchars($account['first_name'], ENT_QUOTES) ?> <?= htmlspecialchars($account['last_name'], ENT_QUOTES) ?></h1>
+                        <h1 class="my-3 fw-light"><?= isset($account['first_name']) ? htmlspecialchars($account['first_name'], ENT_QUOTES)  . ' ' . htmlspecialchars($account['first_name'], ENT_QUOTES) : htmlspecialchars($account['username']) ?></h1>
                         <h3 class="text-muted mb-1 fw-light"><?= htmlspecialchars($account['occupation'], ENT_QUOTES)?></h3>
                         <p class="text-muted mb-4 fst-italic"><?= htmlspecialchars($account['motto'], ENT_QUOTES)?></p>
+                        <ul class="list-unstyled d-flex align-items-center justify-content-center mb-4">
+                            <li class="ms-3">
+                                <a class="link-body-emphasis" href="https://www.facebook.com/<?=htmlspecialchars($account['facebook'], ENT_QUOTES)?>" aria-label="Facebook">
+                                    <img src="assets/icons/facebook-blue.svg" alt="">
+                                </a>
+                            </li>
+                            <li class="ms-3">
+                                <a class="link-body-emphasis" href="https://www.instagram.com/<?=htmlspecialchars($account['instagram'], ENT_QUOTES)?>" aria-label="Instagram">
+                                    <img src="assets/icons/instagram-blue.svg" alt="">
+                                </a>
+                            </li>
+                            <li class="ms-3">
+                                <a class="link-body-emphasis" href="https://www.x.com/<?=htmlspecialchars($account['twitter'], ENT_QUOTES)?>" aria-label="Twitter">
+                                    <img src="assets/icons/twitter-blue.svg" alt="">
+                                </a>
+                            </li>
+                        </ul>
                         <div class="d-flex justify-content-center mb-2">
                             <a class="btn btn-primary me-1" href="?action=edit">Edit Profile</a>
                             <a href="logout.php" type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-primary ms-1">Logout</a>
@@ -158,6 +175,30 @@ if (isset($_POST['username'], $_POST['npassword'], $_POST['cpassword'], $_POST['
                                 <p class="text-muted mb-0"><?=date('F jS, Y', strtotime($account['registered']))?></p>
                             </div>
                         </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-4">
+                                <p class="mb-0"><strong>Facebook</strong></p>
+                            </div>
+                            <div class="col-sm-8">
+                                <p class="text-muted mb-0"><?=htmlspecialchars($account['facebook'], ENT_QUOTES)?></p>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-4">
+                                <p class="mb-0"><strong>Instagram</strong></p>
+                            </div>
+                            <div class="col-sm-8">
+                                <p class="text-muted mb-0"><?=htmlspecialchars($account['instagram'], ENT_QUOTES)?></p>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-4">
+                                <p class="mb-0"><strong>X</strong></p>
+                            </div>
+                            <div class="col-sm-8">
+                                <p class="text-muted mb-0"><?=htmlspecialchars($account['twitter'], ENT_QUOTES)?></p>
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>
@@ -221,6 +262,21 @@ if (isset($_POST['username'], $_POST['npassword'], $_POST['cpassword'], $_POST['
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="location">Location</span>
                         <input class="form-control" type="text" name="location" placeholder="Location" id="location" value="<?=htmlspecialchars($account['location'], ENT_QUOTES)?>">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="facebook">Facebook</span>
+                        <input class="form-control" type="text" name="facebook" placeholder="Facebook" id="facebook" value="<?=htmlspecialchars($account['facebook'], ENT_QUOTES)?>">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="instagram">Instagram</span>
+                        <input class="form-control" type="text" name="instagram" placeholder="instagram" id="instagram" value="<?=htmlspecialchars($account['instagram'], ENT_QUOTES)?>">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="twitter">Twitter</span>
+                        <input class="form-control" type="text" name="twitter" placeholder="twitter" id="twitter" value="<?=htmlspecialchars($account['twitter'], ENT_QUOTES)?>">
                     </div>
 
                     <?php if ($error_msg): ?>

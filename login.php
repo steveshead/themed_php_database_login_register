@@ -23,6 +23,9 @@ if (isset($_COOKIE['remember_me']) && !empty($_COOKIE['remember_me'])) {
         $_SESSION['account_name'] = $account['username'];
         $_SESSION['account_id'] = $account['id'];
         $_SESSION['account_role'] = $account['role'];
+        $_SESSION['facebook'] = $account['facebook'];
+        $_SESSION['instagram'] = $account['instagram'];
+        $_SESSION['twitter'] = $account['twitter'];
         // Update last seen date
         $date = date('Y-m-d\TH:i:s');
         $stmt = $pdo->prepare('UPDATE accounts SET last_seen = ? WHERE id = ?');
