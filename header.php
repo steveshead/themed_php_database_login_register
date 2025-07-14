@@ -41,6 +41,7 @@ if (isset($_SESSION['first_name'])) {
                 <ul class="navbar-nav position-absolute top-50 start-50 translate-middle">
 
                     <li class="nav-item me-2"><a class="nav-link text-uppercase <?= $current_file_name === 'index.php' ? 'active' : '' ?>" href="/">Home</a></li>
+                    <li class="nav-item me-2"><a class="nav-link text-uppercase <?= $current_file_name === 'about.php' ? 'active' : '' ?>" href="about.php">About Us</a></li>
                     <li class="<?=$nav_item_class?>"><a class="nav-link text-uppercase <?= $current_file_name === 'profile.php' ? 'active' : '' ?>" href="profile.php">Profile</a></li>
                     <li class="nav-item me-2"><a class="nav-link text-uppercase <?= $current_file_name === 'contact.php' ? 'active' : '' ?>" href="contact.php">Contact</a></li>
                     <li class="<?=$nav_item_class?> "><?=$admin_panel_link?></li>

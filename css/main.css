@@ -38,4 +38,8 @@ footer h5 {
   background-color: #569aff;
   border-color: #569aff;
 }
+.about-image {
+  padding: 8px;
+  border: 1px solid #cfcfcf;
+}
 

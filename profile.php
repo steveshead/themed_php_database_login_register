@@ -73,7 +73,7 @@ if (isset($_POST['username'], $_POST['npassword'], $_POST['cpassword'], $_POST['
                 <div class="col-lg-4 offset-lg-2">
                     <div class="text-center">
                         <h2 class="fw-light mb-4">User Details</h2>
-                        <img src="<?= !empty($account['avatar']) ? htmlspecialchars($account['avatar'], ENT_QUOTES) : '/images/avatar/default_avatar.png' ?>" class="rounded-circle img-fluid" style="width: 150px;">
+                        <img src="<?= !empty($account['avatar']) ? htmlspecialchars($account['avatar'], ENT_QUOTES) : '/images/avatar/default_avatar.png' ?>" class="rounded-circle img-fluid p-2 border shadow" style="width: 200px;">
                         <h1 class="my-3 fw-light"><?= isset($account['first_name']) ? htmlspecialchars($account['first_name'], ENT_QUOTES)  . ' ' . htmlspecialchars($account['first_name'], ENT_QUOTES) : htmlspecialchars($account['username']) ?></h1>
                         <h3 class="text-muted mb-1 fw-light"><?= htmlspecialchars($account['occupation'], ENT_QUOTES)?></h3>
                         <p class="text-muted mb-4 fst-italic"><?= htmlspecialchars($account['motto'], ENT_QUOTES)?></p>
