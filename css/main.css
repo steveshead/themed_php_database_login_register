@@ -30,9 +30,6 @@ footer h5 {
 .edit-profile .input-group-text {
   width: 160px;
 }
-.login-form a {
-  text-decoration: none;
-}
 .login-form .btn-outline-secondary:hover {
   color: #fff;
   background-color: #569aff;

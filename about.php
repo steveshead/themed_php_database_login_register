@@ -7,7 +7,7 @@ require_once 'header.php';
 
 ?>
         <!-- Hero Section -->
-        <section class="py-5 bg-light">
+        <section class="py-5">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-6">
@@ -35,7 +35,7 @@ require_once 'header.php';
             </div>
         </section>
         <!-- Mission & Values Section -->
-        <section class="py-5 bg-light">
+        <section class="py-5 bg-light border">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 mb-4">

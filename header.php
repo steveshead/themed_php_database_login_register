@@ -31,7 +31,7 @@ if (isset($_SESSION['first_name'])) {
 <header class="shadow bg-white sticky-top">
     <div class="container">
         <nav class="position-relative navbar navbar-expand-lg fixed-top navbar-light py-3 mb-5">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/">
                 <img src="assets/logos/novus/novus.png" alt="" width="106">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="side-menu" data-target="#sideMenuHeaders07" aria-controls="sideMenuHeaders07" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,8 +48,8 @@ if (isset($_SESSION['first_name'])) {
                     <li class="<?=$nav_item_class?> nav-item me-2"><a class="btn btn-primary btn-sm mt-1 text-uppercase" href="logout.php">Logout</a></li>
                 </ul>
                 <div class="ms-auto <?= $logged_in ? 'display-none' : '' ?>">
-                    <a class="btn btn-outline-primary me-2" href="login.php">Log In</a>
-                    <a class="btn btn-primary" href="register.php">Sign Up</a>
+                    <a class="btn btn-primary me-2" href="login.php">Log In</a>
+                    <a class="btn btn-outline-primary" href="register.php">Sign Up</a>
                 </div>
             </div>
             <ul class="list-unstyled d-flex align-items-center justify-content-center mb-0">

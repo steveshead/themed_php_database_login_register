@@ -38,46 +38,47 @@ if (isset($_COOKIE['remember_me']) && !empty($_COOKIE['remember_me'])) {
 ?>
 
 <section class="position-relative py-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-lg-6">
-                <div class="row pt-4">
-                    <div class="col-12 col-md-8 col-lg-10 mx-auto">
+    <div class="container pb-5">
+        <div class="row pt-4">
+            <div class="col-lg-5 offset-1 pe-5">
 
-                        <div class="mb-4">
-                            <form action="authenticate.php" class="login-form">
-                                <span class="text-muted">Sign In</span>
-                                <h2 class="mb-4 fw-light">Join our community</h2>
-                                <div class="mb-3 input-group">
-                                    <input class="form-control" type="text" name="username" placeholder="Enter Your Username" id="username" required/>
-                                    <span class="input-group-text">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                                  </span>
-                                </div>
-                                <div class="mb-3 input-group">
-                                    <input type="password" class="form-control"  name="password" placeholder="Enter your password" id="password" required/>
-                                    <div class="input-group-text">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 22 22" fill="none" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                                    </div>
-                                </div>
-                                <button class="btn btn-primary mb-2 w-100" type="submit">Sign In</button>
-                                <a class="forgot-password text-secondary" href="forgot-password.php">Reset Password</a>
-                                <p class="mb-4 text-muted text-center">or continue with</p>
-                                <button class="btn btn-outline-secondary mb-2 w-100 text-start" href="#">
-                                    <img class="img-fluid me-2" src="assets/logos/facebook-sign.svg"/>
-                                    <span>Sign In with Facebook</span>
-                                </button>
-                                <button class="btn btn-outline-secondary w-100 text-start" href="#">
-                                    <img class="img-fluid me-2" src="assets/logos/google-sign.svg"/>
-                                    <span>Sign In with Google</span>
-                                </button>
-                                <p class="mt-4"><a href="#">Police privacy</a> and <a href="#">Terms of Use</a></p>
-                            </form>
+                <div class="mb-4">
+                    <form action="authenticate.php" class="login-form">
+                        <span class="text-muted">Sign In</span>
+                        <h2 class="mb-4 fw-light">Login to your community</h2>
+                        <div class="mb-3 input-group">
+                            <input class="form-control" type="text" name="username" placeholder="Enter Your Username" id="username" required/>
+                            <span class="input-group-text">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                                </svg>
+                          </span>
                         </div>
-                    </div>
+                        <div class="mb-3 input-group">
+                            <input type="password" class="form-control"  name="password" placeholder="Enter your password" id="password" required/>
+                            <div class="input-group-text">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 0a4 4 0 0 1 4 4v2.05a2.5 2.5 0 0 1 2 2.45v5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 2 13.5v-5a2.5 2.5 0 0 1 2-2.45V4a4 4 0 0 1 4-4M4.5 7A1.5 1.5 0 0 0 3 8.5v5A1.5 1.5 0 0 0 4.5 15h7a1.5 1.5 0 0 0 1.5-1.5v-5A1.5 1.5 0 0 0 11.5 7zM8 1a3 3 0 0 0-3 3v2h6V4a3 3 0 0 0-3-3"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary mb-2 w-100" type="submit">Sign In</button>
+                        <a class="forgot-password text-secondary text-decoration-none" href="forgot-password.php">Reset Password</a>
+                        <p class="mb-4 text-muted text-center">or continue with</p>
+                        <button class="btn btn-outline-secondary mb-2 w-100 text-start" href="#">
+                            <img class="img-fluid me-2" src="assets/logos/facebook-sign.svg"/>
+                            <span>Sign In with Facebook</span>
+                        </button>
+                        <button class="btn btn-outline-secondary w-100 text-start" href="#">
+                            <img class="img-fluid me-2" src="assets/logos/google-sign.svg"/>
+                            <span>Sign In with Google</span>
+                        </button>
+                        <p class="mt-4" style="font-size:17px !important;"><a class="text-decoration-none" href="#">Police privacy</a> and <a class="text-decoration-none" href="#">Terms of Use</a></p>
+                    </form>
                 </div>
             </div>
-            <div class="col-12 col-lg-6 bg-primary d-lg-flex align-items-center">
+
+            <div class="col-lg-5 bg-primary d-lg-flex align-items-center">
                 <img class="img-fluid" src="assets/illustrations/walk-dog.png" alt=""/>
             </div>
         </div>

@@ -35,40 +35,45 @@ if (isset($_COOKIE['remember_me']) && !empty($_COOKIE['remember_me'])) {
 
 <div class="container py-5">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 offset-1">
             <div class="register">
-                <div class="icon">
-                    <!-- You could add your own site logo or icon here -->
-                    <svg width="26" height="26" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/></svg>
-                </div>
-                <h1>Member Register</h1>
-                <form action="register-process.php" method="post" class="form register-form">
 
+                <form action="register-process.php" method="post" class="form register-form">
+                    <span class="text-muted">Sign Up</span>
+                    <h2 class="mb-4 fw-light">Join our community</h2>
                     <div class="mb-3 input-group">
-                        <input class="form-control" type="text" name="username" placeholder="Enter Your Username" id="username" required/>
+                        <input class="form-control" type="text" name="username" placeholder="Username" id="username" required/>
                         <span class="input-group-text">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                            </svg>
                           </span>
                     </div>
 
                     <div class="mb-3 input-group">
-                        <input type="password" class="form-control"  name="password" placeholder="Enter your password" id="password" required/>
+                        <input type="password" class="form-control"  name="password" placeholder="Password" id="password" required/>
                         <div class="input-group-text">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 22 22" fill="none" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 0a4 4 0 0 1 4 4v2.05a2.5 2.5 0 0 1 2 2.45v5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 2 13.5v-5a2.5 2.5 0 0 1 2-2.45V4a4 4 0 0 1 4-4M4.5 7A1.5 1.5 0 0 0 3 8.5v5A1.5 1.5 0 0 0 4.5 15h7a1.5 1.5 0 0 0 1.5-1.5v-5A1.5 1.5 0 0 0 11.5 7zM8 1a3 3 0 0 0-3 3v2h6V4a3 3 0 0 0-3-3"/>
+                            </svg>
                         </div>
                     </div>
 
                     <div class="mb-3 input-group">
                         <input type="password" class="form-control"  name="cpassword" placeholder="Confirm password" id="cpassword" required/>
                         <div class="input-group-text">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 22 22" fill="none" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 0a4 4 0 0 1 4 4v2.05a2.5 2.5 0 0 1 2 2.45v5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 2 13.5v-5a2.5 2.5 0 0 1 2-2.45V4a4 4 0 0 1 4-4M4.5 7A1.5 1.5 0 0 0 3 8.5v5A1.5 1.5 0 0 0 4.5 15h7a1.5 1.5 0 0 0 1.5-1.5v-5A1.5 1.5 0 0 0 11.5 7zM8 1a3 3 0 0 0-3 3v2h6V4a3 3 0 0 0-3-3"/>
+                            </svg>
                         </div>
                     </div>
 
                     <div class="mb-3 input-group">
                         <input class="form-control" type="email" name="email" placeholder="Email Address" id="email" required/>
                         <span class="input-group-text">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z"/>
+                            </svg>
                           </span>
                     </div>
 
@@ -76,7 +81,7 @@ if (isset($_COOKIE['remember_me']) && !empty($_COOKIE['remember_me'])) {
 
                     <button class="btn btn-primary mb-2" type="submit">Register</button>
 
-                    <p class="register-link">Already have an account? <a href="index.php" class="form-link">Login Here</a></p>
+                    <p style="font-size:17px !important" class="register-link">Already have an account? <a class="text-decoration-none" href="index.php" class="form-link">Login Here</a></p>
 
                 </form>
 
@@ -101,6 +106,9 @@ if (isset($_COOKIE['remember_me']) && !empty($_COOKIE['remember_me'])) {
                     };
                 </script>
             </div>
+        </div>
+        <div class="offset-1 col-lg-4 d-lg-flex align-items-center">
+            <img class="img-fluid rounded-circle p-2 border shadow" width="300" src="images/avatar/default_avatar.png" alt=""/>
         </div>
     </div>
 </div>
