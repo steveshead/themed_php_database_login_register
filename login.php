@@ -40,8 +40,7 @@ if (isset($_COOKIE['remember_me']) && !empty($_COOKIE['remember_me'])) {
 <section class="position-relative py-5">
     <div class="container pb-5">
         <div class="row pt-4">
-            <div class="col-lg-5 offset-1 pe-5">
-
+            <div class="col-lg-4 offset-1 pe-5">
                 <div class="mb-4">
                     <form action="authenticate.php" class="login-form">
                         <span class="text-muted">Sign In</span>
@@ -78,8 +77,8 @@ if (isset($_COOKIE['remember_me']) && !empty($_COOKIE['remember_me'])) {
                 </div>
             </div>
 
-            <div class="col-lg-5 bg-primary d-lg-flex align-items-center">
-                <img class="img-fluid" src="assets/illustrations/walk-dog.png" alt=""/>
+            <div class="offset-1 col-lg-4 d-lg-flex align-items-center">
+                <img class="img-fluid rounded-circle p-2 border shadow" width="400" src="images/avatar/default_avatar.png" alt=""/>
             </div>
         </div>
     </div>
