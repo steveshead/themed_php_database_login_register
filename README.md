@@ -47,7 +47,7 @@ This system provides a simple themed user login and registration functionality u
 - `reset-password.php`
 - `mysql.sql`
 
-## PHP Databaseless User Login and Registration System
+## PHP User Login and Registration System with MySQL
 
 Written in PHP this script uses MySql to store user details. It has two user roles: admin and member.
 I have setup one user for each role with default values. Users and admins can edit their user 
