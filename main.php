@@ -234,4 +234,26 @@ function send_contact_email($name, $email, $subject, $message) {
 		return false;
 	}
 }
+// implement brute force checks
+function login_attempts($pdo, $update = TRUE) {
+	$ip = $_SERVER['REMOTE_ADDR'];
+	$now = date('Y-m-d H:i:s');
+	if ($update) {
+		$stmt = $pdo->prepare('INSERT INTO login_attempts (ip_address, created) VALUES (?,?) ON DUPLICATE KEY UPDATE attempts_left = attempts_left - 1, created = VALUES(created)');
+		$stmt->execute([ $ip, $now ]);
+	}
+	$stmt = $pdo->prepare('SELECT * FROM login_attempts WHERE ip_address = ?');
+	$stmt->execute([ $ip ]);
+	$login_attempts = $stmt->fetch(PDO::FETCH_ASSOC);
+	if ($login_attempts) {
+		// The user can try to login after 1 day... change the "+1 day" if you want to increase/decrease this date.
+		$expire = date('Y-m-d H:i:s', strtotime('+1 day', strtotime($login_attempts['created'])));
+		if ($now > $expire) {
+			$stmt = $pdo->prepare('DELETE FROM login_attempts WHERE ip_address = ?');
+			$stmt->execute([ $ip ]);
+			$login_attempts = array();
+		}
+	}
+	return $login_attempts;
+}
 ?>

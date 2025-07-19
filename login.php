@@ -44,7 +44,7 @@ if (isset($_COOKIE['remember_me']) && !empty($_COOKIE['remember_me'])) {
                 <div class="mb-4">
                     <form action="authenticate.php" class="login-form">
                         <span class="text-muted">Sign In</span>
-                        <h2 class="mb-4 fw-light">Login to your community</h2>
+                        <h2 class="mb-4 fw-light">Login to our community</h2>
                         <div class="mb-3 input-group">
                             <input class="form-control" type="text" name="username" placeholder="Enter Your Username" id="username" required/>
                             <span class="input-group-text">
@@ -63,6 +63,9 @@ if (isset($_COOKIE['remember_me']) && !empty($_COOKIE['remember_me'])) {
                         </div>
                         <button class="btn btn-primary mb-2 w-100" type="submit">Sign In</button>
                         <a class="forgot-password text-secondary text-decoration-none" href="forgot-password.php">Reset Password</a>
+
+                        <div class="msg alert"></div>
+
                         <p class="mb-4 text-muted text-center">or continue with</p>
                         <button class="btn btn-outline-secondary mb-2 w-100 text-start" href="#">
                             <img class="img-fluid me-2" src="assets/logos/facebook-sign.svg"/>
@@ -89,14 +92,14 @@ if (isset($_COOKIE['remember_me']) && !empty($_COOKIE['remember_me'])) {
             event.preventDefault();
             fetch(loginForm.action, { method: 'POST', body: new FormData(loginForm), cache: 'no-store' }).then(response => response.text()).then(result => {
                 if (result.toLowerCase().includes('success:')) {
-                    loginForm.querySelector('.msg').classList.remove('error','success');
-                    loginForm.querySelector('.msg').classList.add('success');
+                    loginForm.querySelector('.msg').classList.remove('alert-danger','alert-success');
+                    loginForm.querySelector('.msg').classList.add('alert-success');
                     loginForm.querySelector('.msg').innerHTML = result.replace('Success: ', '');
                 } else if (result.toLowerCase().includes('redirect:')) {
                     window.location.href = result.replace('Redirect:', '').trim();
                 } else {
-                    loginForm.querySelector('.msg').classList.remove('error','success');
-                    loginForm.querySelector('.msg').classList.add('error');
+                    loginForm.querySelector('.msg').classList.remove('alert-danger','alert-success');
+                    loginForm.querySelector('.msg').classList.add('alert-danger');
                     loginForm.querySelector('.msg').innerHTML = result.replace('Error: ', '');
                 }
             });
