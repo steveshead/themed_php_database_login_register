@@ -44,6 +44,13 @@ define('smtp_port',465);
 define('smtp_user','user@example.com');
 // SMTP Password
 define('smtp_pass','secret');
+/* Google OAuth */
+// The OAuth client ID associated with your API console account.
+define('google_oauth_client_id','YOUR_CLIENT_ID');
+// The OAuth client secret associated with your API console account.
+define('google_oauth_client_secret','YOUR_SECRET_KEY');
+// The URL to the Google OAuth file.
+define('google_oauth_redirect_uri','http://loginregistration-themed.local:8890/google-oauth.php');
 
 // Uncomment the below to output all errors
 // ini_set('log_errors', true);

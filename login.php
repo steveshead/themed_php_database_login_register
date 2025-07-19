@@ -35,6 +35,8 @@ if (isset($_COOKIE['remember_me']) && !empty($_COOKIE['remember_me'])) {
         exit;
     }
 }
+// add CSRF token
+$_SESSION['token'] = hash('sha256', uniqid(rand(), true));
 ?>
 
 <section class="position-relative py-5">
@@ -64,19 +66,24 @@ if (isset($_COOKIE['remember_me']) && !empty($_COOKIE['remember_me'])) {
                         <button class="btn btn-primary mb-2 w-100" type="submit">Sign In</button>
                         <a class="forgot-password text-secondary text-decoration-none" href="forgot-password.php">Reset Password</a>
 
-                        <div class="msg alert"></div>
+                        <input type="hidden" name="token" value="<?=$_SESSION['token']?>">
+                        <div class="msg"></div>
 
-                        <p class="mb-4 text-muted text-center">or continue with</p>
-                        <button class="btn btn-outline-secondary mb-2 w-100 text-start" href="#">
-                            <img class="img-fluid me-2" src="assets/logos/facebook-sign.svg"/>
-                            <span>Sign In with Facebook</span>
-                        </button>
+
+                    </form>
+                    <p class="mb-4 text-muted text-center">or continue with</p>
+                    <button class="btn btn-outline-secondary mb-2 w-100 text-start" href="#">
+                        <img class="img-fluid me-2" src="assets/logos/facebook-sign.svg"/>
+                        <span>Sign In with Facebook</span>
+                    </button>
+                    <a href="google-oauth.php" class="gl-btn">
                         <button class="btn btn-outline-secondary w-100 text-start" href="#">
                             <img class="img-fluid me-2" src="assets/logos/google-sign.svg"/>
                             <span>Sign In with Google</span>
                         </button>
-                        <p class="mt-4" style="font-size:17px !important;"><a class="text-decoration-none" href="#">Police privacy</a> and <a class="text-decoration-none" href="#">Terms of Use</a></p>
-                    </form>
+                    </a>
+
+                    <p class="mt-4" style="font-size:17px !important;"><a class="text-decoration-none" href="#">Police privacy</a> and <a class="text-decoration-none" href="#">Terms of Use</a></p>
                 </div>
             </div>
 
@@ -92,14 +99,14 @@ if (isset($_COOKIE['remember_me']) && !empty($_COOKIE['remember_me'])) {
             event.preventDefault();
             fetch(loginForm.action, { method: 'POST', body: new FormData(loginForm), cache: 'no-store' }).then(response => response.text()).then(result => {
                 if (result.toLowerCase().includes('success:')) {
-                    loginForm.querySelector('.msg').classList.remove('alert-danger','alert-success');
-                    loginForm.querySelector('.msg').classList.add('alert-success');
+                    loginForm.querySelector('.msg').classList.remove('mt-2','alert','alert-danger','alert-success');
+                    loginForm.querySelector('.msg').classList.add('mt-2','alert','alert-success');
                     loginForm.querySelector('.msg').innerHTML = result.replace('Success: ', '');
                 } else if (result.toLowerCase().includes('redirect:')) {
                     window.location.href = result.replace('Redirect:', '').trim();
                 } else {
-                    loginForm.querySelector('.msg').classList.remove('alert-danger','alert-success');
-                    loginForm.querySelector('.msg').classList.add('alert-danger');
+                    loginForm.querySelector('.msg').classList.remove('mt-2','alert','alert-danger','alert-success');
+                    loginForm.querySelector('.msg').classList.add('mt-2','alert','alert-danger');
                     loginForm.querySelector('.msg').innerHTML = result.replace('Error: ', '');
                 }
             });

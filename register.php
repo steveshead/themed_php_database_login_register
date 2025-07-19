@@ -31,6 +31,8 @@ if (isset($_COOKIE['remember_me']) && !empty($_COOKIE['remember_me'])) {
 		exit;
 	}
 }
+// add CSRF token
+$_SESSION['token'] = hash('sha256', uniqid(rand(), true));
 ?>
 <section class="py-5">
     <div class="container pb-5">
@@ -77,7 +79,8 @@ if (isset($_COOKIE['remember_me']) && !empty($_COOKIE['remember_me'])) {
                               </span>
                         </div>
 
-                        <div class="msg mb-2"></div>
+                        <input type="hidden" name="token" value="<?=$_SESSION['token']?>">
+                        <div class="msg alert mb-2"></div>
 
                         <button class="btn btn-primary mb-2" type="submit">Register</button>
 
@@ -92,14 +95,14 @@ if (isset($_COOKIE['remember_me']) && !empty($_COOKIE['remember_me'])) {
                             event.preventDefault();
                             fetch(registrationForm.action, { method: 'POST', body: new FormData(registrationForm), cache: 'no-store' }).then(response => response.text()).then(result => {
                                 if (result.toLowerCase().includes('success:')) {
-                                    registrationForm.querySelector('.msg').classList.remove('error','success');
-                                    registrationForm.querySelector('.msg').classList.add('success');
+                                    registrationForm.querySelector('.msg').classList.remove('mt-2','alert','alert-danger','alert-success');
+                                    registrationForm.querySelector('.msg').classList.add('mt-2','alert','alert-success');
                                     registrationForm.querySelector('.msg').innerHTML = result.replace('Success: ', '');
                                 } else if (result.toLowerCase().includes('redirect:')) {
                                     window.location.href = result.replace('Redirect:', '').trim();
                                 } else {
-                                    registrationForm.querySelector('.msg').classList.remove('error','success');
-                                    registrationForm.querySelector('.msg').classList.add('error');
+                                    registrationForm.querySelector('.msg').classList.remove('mt-2','alert','alert-danger','alert-success');
+                                    registrationForm.querySelector('.msg').classList.add('mt-2','alert','alert-danger');
                                     registrationForm.querySelector('.msg').innerHTML = result.replace('Error: ', '');
                                 }
                             });

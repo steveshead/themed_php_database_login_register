@@ -46,6 +46,7 @@ if (isset($_POST['username'], $_POST['npassword'], $_POST['cpassword'], $_POST['
 			$stmt->execute([ $_POST['first_name'], $_POST['last_name'], $_POST['username'], $password, $_POST['email'], $_POST['occupation'], $_POST['motto'], $_POST['location'], $_POST['facebook'], $_POST['instagram'], $_POST['twitter'], $activation_code, $_SESSION['account_id'] ]);
 			// Update the session variables
 			$_SESSION['account_name'] = $_POST['username'];
+			$_SESSION['first_name'] = $_POST['first_name'];
 			// If email has changed, logout the user and send a new activation email
 			if (account_activation && $account['email'] != $_POST['email']) {
 				// Account activation required, send the user the activation email with the "send_activation_email" function from the "main.php" file
@@ -74,7 +75,7 @@ if (isset($_POST['username'], $_POST['npassword'], $_POST['cpassword'], $_POST['
                     <div class="text-center">
                         <h2 class="fw-light mb-4">User Details</h2>
                         <img src="<?= !empty($account['avatar']) ? htmlspecialchars($account['avatar'], ENT_QUOTES) : '/images/avatar/default_avatar.png' ?>" class="rounded-circle img-fluid p-2 border shadow" style="width: 200px;">
-                        <h1 class="my-3 fw-light"><?= isset($account['first_name']) ? htmlspecialchars($account['first_name'], ENT_QUOTES)  . ' ' . htmlspecialchars($account['first_name'], ENT_QUOTES) : htmlspecialchars($account['username']) ?></h1>
+                        <h1 class="my-3 fw-light"><?= isset($account['first_name']) ? htmlspecialchars($account['first_name'], ENT_QUOTES)  . ' ' . htmlspecialchars($account['last_name'], ENT_QUOTES) : htmlspecialchars($account['username']) ?></h1>
                         <h3 class="text-muted mb-1 fw-light"><?= htmlspecialchars($account['occupation'], ENT_QUOTES)?></h3>
                         <p class="text-muted mb-4 fst-italic"><?= htmlspecialchars($account['motto'], ENT_QUOTES)?></p>
                         <ul class="list-unstyled d-flex align-items-center justify-content-center mb-4">

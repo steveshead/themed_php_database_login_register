@@ -1,5 +1,9 @@
 <?php
 include 'main.php';
+// check CSRF token
+if (!isset($_POST['token']) || $_POST['token'] != $_SESSION['token']) {
+    exit('Error: Incorrect token provided!');
+}
 // check for login attempts for brute force checks
 $login_attempts = login_attempts($pdo, FALSE);
 if ($login_attempts && $login_attempts['attempts_left'] <= 0) {

@@ -51,13 +51,22 @@ CREATE TABLE `accounts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `accounts`
+-- Table structure for table `login_attempts`
 --
 
 INSERT INTO `accounts` (`id`, `username`, `first_name`, `last_name`, `password`, `email`, `role`, `approved`, `activation_code`, `remember_me_code`, `reset_code`, `last_seen`, `registered`, `avatar`, `occupation`, `motto`, `location`) VALUES
 (1, 'admin', NULL, NULL, '$2y$10$ZU7Jq5yZ1U/ifeJoJzvLbenjRyJVkSzmQKQc.X0KDPkfR3qs/iA7O', 'admin@example.com', 'Admin', 1, 'activated', '', NULL, '2025-06-01 21:25:38', '2025-01-01 00:00:00', NULL, NULL, NULL),
 (2, 'member', NULL, NULL, '$2y$10$yWKu95tLTnqdNhR/XfHtEekrjKJg2iVa8p65Da/EoijSPaFkRnmRG', 'member@example.com', 'Member', 1, 'activated', '$2y$10$4U3BaM.Xmvz1xI.12l9mEedOs3ffV9rrsIHSC1oDwO7cnpQPxHl.O', NULL, '2025-06-07 19:25:49', '2025-01-01 00:00:00', NULL, NULL, NULL);
 
+
+CREATE TABLE IF NOT EXISTS `login_attempts` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `ip_address` varchar(255) NOT NULL,
+    `attempts_left` tinyint(1) NOT NULL DEFAULT 5,
+    `created` datetime NOT NULL DEFAULT current_timestamp(),
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `ip_address` (`ip_address`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 --
 -- Indexes for dumped tables
 --
