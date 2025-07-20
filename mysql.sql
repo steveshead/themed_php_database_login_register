@@ -47,7 +47,9 @@ CREATE TABLE `accounts` (
   `location` text COLLATE utf8mb4_unicode_ci,
   `facebook` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `instagram` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `twitter` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `twitter` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tfa_code` VARCHAR(255) DEFAULT NULL,
+  `ip` VARCHAR(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --

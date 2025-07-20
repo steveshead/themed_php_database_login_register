@@ -11,7 +11,7 @@ require_once 'header.php';
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-6">
-                        <h1 class="mb-3 fw-bold">Learn <span class="text-primary">More</span> About<br>Our Company</h1>
+                        <h1 class="mb-3 fw-bold">Learn <span class="text-primary">more about</span><br>our company</h1>
                         <p class="lead">We are passionate about delivering exceptional solutions that transform businesses and create lasting impact in the digital world.</p>
                         <p class="lead">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
                         <a class="btn btn-primary me-3" href="#">Learn More</a><a class="btn btn-outline-primary" href="#">Contact Us</a>
@@ -27,7 +27,9 @@ require_once 'header.php';
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
-                        <h2 class="mb-3 fs-1 fw-bold text-center">Where We Began</h2>
+                        <h2 class="mb-3 fs-1 fw-bold text-center"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+                            </svg> This is where we began...</h2>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sit eaque totam aliquid veritatis assumenda temporibus harum unde! Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                         <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
                     </div>
