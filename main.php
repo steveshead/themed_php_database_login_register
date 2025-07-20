@@ -256,4 +256,46 @@ function login_attempts($pdo, $update = TRUE) {
 	}
 	return $login_attempts;
 }
+
+// Send two-factor authentication email function
+function send_twofactor_email($email, $code) {
+	if (!mail_enabled) return;
+	// Include PHPMailer library
+	include_once 'lib/phpmailer/Exception.php';
+	include_once 'lib/phpmailer/PHPMailer.php';
+	include_once 'lib/phpmailer/SMTP.php';
+	// Create an instance; passing `true` enables exceptions
+	$mail = new PHPMailer(true);
+	try {
+		// Server settings
+		if (SMTP) {
+			$mail->isSMTP();
+			$mail->Host = smtp_host;
+			$mail->SMTPAuth = true;
+			$mail->Username = smtp_user;
+			$mail->Password = smtp_pass;
+			$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+			$mail->Port = smtp_port;
+		}
+		// Recipients
+		$mail->setFrom(mail_from, mail_name);
+		$mail->addAddress($email);
+		$mail->addReplyTo(mail_from, mail_name);
+		// Content
+		$mail->isHTML(true);
+		$mail->Subject = 'Your Access Code';
+		// Read the template contents and replace the "%code%" placeholder with the above variable
+		$email_template = str_replace('%code%', $code, file_get_contents('twofactor-email-template.html'));
+		// Set email body
+		$body = '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,minimum-scale=1"><title>Your Access Code</title></head><body style="margin:0;padding:0">' . $email_template . '</body></html>';
+		// Set email body
+		$mail->Body = $body;
+		$mail->AltBody = strip_tags($email_template);
+		// Send mail
+		$mail->send();
+	} catch (Exception $e) {
+		// Output error message
+		exit('Error: Message could not be sent. Mailer Error: ' . $mail->ErrorInfo);
+	}
+}
 ?>

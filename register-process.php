@@ -47,8 +47,9 @@ if ($account) {
 	// Current date
 	$date = date('Y-m-d\TH:i:s');
 	// Prepare query; prevents SQL injection
-	$stmt = $pdo->prepare('INSERT INTO accounts (username, password, email, activation_code, role, registered, last_seen, approved) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
-	$stmt->execute([ $_POST['username'], $password, $_POST['email'], $activation_code, $role, $date, $date, $approved ]);
+    $stmt = $pdo->prepare('INSERT INTO accounts (username, password, email, activation_code, role, registered, last_seen, approved, ip) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    $ip = $_SERVER['REMOTE_ADDR'];
+    $stmt->execute([ $_POST['username'], $password, $_POST['email'], $activation_code, $role, $date, $date, $approved, $ip ]);
 	// Get last insert ID
 	$id = $pdo->lastInsertId();
 	// Send notification email
@@ -71,7 +72,7 @@ if ($account) {
 			$_SESSION['account_id'] = $id;
 			$_SESSION['account_role'] = $role;		
 			// Do not change the output message as the AJAX code will use this to detect if the registration was successful and redirect to the home page
-			echo 'Redirect: home.php';
+			echo 'Redirect: index.php';
 		} else {
 			echo 'Success: You have successfully registered! You can now login!';
 		}

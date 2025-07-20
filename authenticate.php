@@ -34,6 +34,10 @@ if ($account) {
 		} else if (account_approval && !$account['approved']) {
 			// The account is not approved
 			echo 'Error: Your account has not been approved yet!';
+        } else if ($_SERVER['REMOTE_ADDR'] != $account['ip']) {
+            // Two-factor authentication required
+            $_SESSION['tfa_id'] = $account['id'];
+            echo 'tfa: twofactor.php';
 		} else {
 			// Verification success! User has loggedin!
 			// Declare the session variables, which will basically act like cookies, but will store the data on the server as opposed to the client

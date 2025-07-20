@@ -108,6 +108,8 @@ $_SESSION['token'] = hash('sha256', uniqid(rand(), true));
                     loginForm.querySelector('.msg').innerHTML = result.replace('Success: ', '');
                 } else if (result.toLowerCase().includes('redirect:')) {
                     window.location.href = result.replace('Redirect:', '').trim();
+                } else if (result.includes('tfa:')) {
+                    window.location.href = result.replace('tfa: ', '');
                 } else {
                     loginForm.querySelector('.msg').classList.remove('mt-2','alert','alert-danger','alert-success');
                     loginForm.querySelector('.msg').classList.add('mt-2','alert','alert-danger');
