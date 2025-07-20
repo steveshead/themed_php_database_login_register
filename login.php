@@ -72,10 +72,14 @@ $_SESSION['token'] = hash('sha256', uniqid(rand(), true));
 
                     </form>
                     <p class="mb-4 text-muted text-center">or continue with</p>
-                    <button class="btn btn-outline-secondary mb-2 w-100 text-start" href="#">
-                        <img class="img-fluid me-2" src="assets/logos/facebook-sign.svg"/>
-                        <span>Sign In with Facebook</span>
-                    </button>
+
+                    <a href="facebook-oauth.php" class="fb-btn">
+                        <button class="btn btn-outline-secondary mb-2 w-100 text-start" href="#">
+                            <img class="img-fluid me-2" src="assets/logos/facebook-sign.svg"/>
+                            <span>Sign In with Facebook</span>
+                        </button>
+                    </a>
+
                     <a href="google-oauth.php" class="gl-btn">
                         <button class="btn btn-outline-secondary w-100 text-start" href="#">
                             <img class="img-fluid me-2" src="assets/logos/google-sign.svg"/>

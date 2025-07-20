@@ -51,6 +51,13 @@ define('google_oauth_client_id','YOUR_CLIENT_ID');
 define('google_oauth_client_secret','YOUR_SECRET_KEY');
 // The URL to the Google OAuth file.
 define('google_oauth_redirect_uri','http://loginregistration-themed.local:8890/google-oauth.php');
+/* Facebook OAuth */
+// The OAuth App ID associated with your Facebook App.
+define('facebook_oauth_app_id','YOUR_APP_ID');
+// The OAuth App secret associated with your Facebook App.
+define('facebook_oauth_app_secret','YOUR_APP_SECRET_ID');
+// The URL to the Facebook OAuth file.
+define('facebook_oauth_redirect_uri','http://localhost/phplogin/facebook-oauth.php');
 
 // Uncomment the below to output all errors
 // ini_set('log_errors', true);

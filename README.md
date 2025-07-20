@@ -2,9 +2,11 @@
 ## Overview
 
 This system provides a simple themed user login and registration functionality using MySql to store user details.
+This script utilizes Brute Force and CSRF protections, as well as being able to use 2FA, and has configurable google and facebook
+OAuth logins.
 
 ### Current Date
-`2025-07-18`
+`2025-07-19`
 
 ## Admin Files
 - `admin.js`
@@ -32,6 +34,7 @@ This system provides a simple themed user login and registration functionality u
 - `avatar.php`
 - `config.php`
 - `contact.php`
+- `facebook-oauth.php`
 - `footer.php`
 - `forgot-password.php`
 - `google-oauth.php`
@@ -59,8 +62,6 @@ details from the 'edit profile' link in their dashboard.
 **User**: Member\
 **Password**: member
 
-Added Brute Force and CSRF protection
-
 You can add, edit and delete users through the admin panel, or users can register on the website itself.
 The script will check to see if the email address has already been used. You can have as many members or admins as you need.
 
@@ -71,4 +72,13 @@ Replace **YOUR_CLIENT_ID** with your google auth client ID\
 Replace **YOUR_SECRET_KEY** with your google auth client secret\
 Replace http://loginregistration-themed.local:8890/google-oauth.php with your website URL/google-oauth.php\
 
-Note the google login has not been tested on a public domain. Use at your own risk.
+Note that google login has not been tested on a public domain. Use at your own risk.
+
+## Facebook OAuth Sign In
+For facebook oauth to work you'll need to create a Facebook App, then replace the following in config.php:
+
+Replace **YOUR_CLIENT_ID** with your facebook oauth app ID\
+Replace **YOUR_SECRET_KEY** with your facebook oauth app secret\
+Replace http://loginregistration-themed.local:8890/google-oauth.php with your website URL/facebook-oauth.php\
+
+Note that facebook login has not been tested on a public domain. Use at your own risk.
