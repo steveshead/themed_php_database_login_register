@@ -17,8 +17,35 @@ try {
 }
 // The below function will check if the user is logged-in and also check the remember me cookie
 function check_loggedin($pdo, $redirect_file = 'index.php') {
-	// Comment the below code if you don't want to update the last seen date on each page load
+	// Check if the session has timed out due to inactivity
+	if (isset($_SESSION['account_loggedin']) && isset($_SESSION['last_activity'])) {
+		// Calculate how long the user has been inactive
+		$inactive_time = time() - $_SESSION['last_activity'];
+
+		// If the user has been inactive for longer than the session timeout, log them out
+		if ($inactive_time > session_timeout) {
+			// Unset all session variables
+			$_SESSION = array();
+
+			// If a session cookie exists, destroy it
+			if (isset($_COOKIE[session_name()])) {
+				setcookie(session_name(), '', time() - 42000, '/');
+			}
+
+			// Destroy the session
+			session_destroy();
+
+			// Redirect to the login page with a timeout message
+			header('Location: login.php?timeout=1');
+			exit;
+		}
+	}
+
+	// Update the last activity time
 	if (isset($_SESSION['account_loggedin'])) {
+		$_SESSION['last_activity'] = time();
+
+		// Comment the below code if you don't want to update the last seen date on each page load
 		$date = date('Y-m-d\TH:i:s');
 		$stmt = $pdo->prepare('UPDATE accounts SET last_seen = ? WHERE id = ?');
 		$stmt->execute([ $date, $_SESSION['account_id'] ]);
@@ -40,6 +67,8 @@ function check_loggedin($pdo, $redirect_file = 'index.php') {
 			$_SESSION['facebook'] = $account['facebook'];
 			$_SESSION['instagram'] = $account['instagram'];
 			$_SESSION['twitter'] = $account['twitter'];
+			// Set the last activity timestamp for session timeout tracking
+			$_SESSION['last_activity'] = time();
 			// Update last seen date
 			$date = date('Y-m-d\TH:i:s');
 			$stmt = $pdo->prepare('UPDATE accounts SET last_seen = ? WHERE id = ?');

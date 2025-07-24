@@ -26,6 +26,8 @@ if (isset($_COOKIE['remember_me']) && !empty($_COOKIE['remember_me'])) {
         $_SESSION['facebook'] = $account['facebook'];
         $_SESSION['instagram'] = $account['instagram'];
         $_SESSION['twitter'] = $account['twitter'];
+        // Set the last activity timestamp for session timeout tracking
+        $_SESSION['last_activity'] = time();
         // Update last seen date
         $date = date('Y-m-d\TH:i:s');
         $stmt = $pdo->prepare('UPDATE accounts SET last_seen = ? WHERE id = ?');
@@ -37,6 +39,12 @@ if (isset($_COOKIE['remember_me']) && !empty($_COOKIE['remember_me'])) {
 }
 // add CSRF token
 $_SESSION['token'] = hash('sha256', uniqid(rand(), true));
+
+// Check if the user was redirected due to session timeout
+$timeout_message = '';
+if (isset($_GET['timeout']) && $_GET['timeout'] == 1) {
+    $timeout_message = 'Your session has expired due to inactivity. Please log in again.';
+}
 ?>
 
 <section class="position-relative py-5">
@@ -63,11 +71,31 @@ $_SESSION['token'] = hash('sha256', uniqid(rand(), true));
                                 </svg>
                             </div>
                         </div>
+
                         <button class="btn btn-primary mb-2 w-100" type="submit">Sign In</button>
-                        <a class="forgot-password text-secondary text-decoration-none" href="forgot-password.php">Reset Password</a>
+
+                        <div class="mb-3 input-group">
+
+                            <div class="container p-0">
+                                <div class="row d-flfex">
+                                    <div class="col-lg-6">
+                                        <label id="remember_me" class="fw-light">
+                                            <input class="me-2" type="checkbox" name="remember_me">Remember me
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-6 d-flex justify-content-end">
+                                        <a href="forgot-password.php" class="text-decoration-none fw-light">Forgot password?</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <input type="hidden" name="token" value="<?=$_SESSION['token']?>">
-                        <div class="msg"></div>
+                        <div class="msg">
+                            <?php if (!empty($timeout_message)): ?>
+                            <div class="mt-2 alert alert-warning"><?= $timeout_message ?></div>
+                            <?php endif; ?>
+                        </div>
 
 
                     </form>

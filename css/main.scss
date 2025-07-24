@@ -1,0 +1,61 @@
+$color_1: rgba(0, 0, 0, .55);
+$color_2: rgba(0, 0, 0, .7);
+$color_3: #fff;
+$font-family_1: "Helvetica Neue";
+$background-color_1: #569aff;
+$border-color_1: #569aff;
+
+body {
+  font-family: $font-family_1 !important;
+}
+p {
+  font-size: 19px !important;
+  font-weight: 300 !important;
+}
+.display-none {
+  display: none !important;
+}
+.profile-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+.footer {
+  .nav-link {
+    color: $color_1;
+    &:hover {
+      color: $color_2;
+    }
+  }
+}
+footer {
+  p {
+    font-size: 16px !important;
+  }
+  h5 {
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    font-weight: 300;
+  }
+}
+.edit-profile {
+  .input-group-text {
+    width: 160px;
+  }
+}
+.login-form {
+  .btn-outline-secondary {
+    &:hover {
+      color: $color_3;
+      background-color: $background-color_1;
+      border-color: $border-color_1;
+    }
+  }
+}
+.about-image {
+  padding: 8px;
+  border: 1px solid #cfcfcf;
+  a {
+    text-decoration: none;
+  }
+}

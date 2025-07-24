@@ -52,6 +52,8 @@ if ($account) {
             $_SESSION['facebook'] = $account['facebook'];
             $_SESSION['instagram'] = $account['instagram'];
             $_SESSION['twitter'] = $account['twitter'];
+			// Set the last activity timestamp for session timeout tracking
+			$_SESSION['last_activity'] = time();
 			// IF the "remember me" checkbox is checked...
 			if (isset($_POST['remember_me'])) {
 				// Generate a hash that will be stored as a cookie and in the database. It will be used to identify the user.

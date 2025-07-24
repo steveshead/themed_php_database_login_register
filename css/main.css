@@ -1,42 +1,54 @@
-
 body {
   font-family: "Helvetica Neue" !important;
 }
+
 p {
   font-size: 19px !important;
   font-weight: 300 !important;
 }
+
 .display-none {
   display: none !important;
 }
+
 .profile-avatar {
   width: 60px;
   height: 60px;
   border-radius: 50%;
 }
+
 .footer .nav-link {
-  color: rgba(0, 0, 0, .55);
+  color: rgba(0, 0, 0, 0.55);
 }
 .footer .nav-link:hover {
-  color: rgba(0, 0, 0, .7);
+  color: rgba(0, 0, 0, 0.7);
 }
+
 footer p {
   font-size: 16px !important;
 }
 footer h5 {
   text-transform: uppercase;
   margin-bottom: 15px;
+  font-weight: 300;
 }
+
 .edit-profile .input-group-text {
   width: 160px;
 }
+
 .login-form .btn-outline-secondary:hover {
   color: #fff;
   background-color: #569aff;
   border-color: #569aff;
 }
+
 .about-image {
   padding: 8px;
   border: 1px solid #cfcfcf;
 }
+.about-image a {
+  text-decoration: none;
+}
 
+/*# sourceMappingURL=main.css.map */
