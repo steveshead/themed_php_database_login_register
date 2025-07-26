@@ -60,7 +60,7 @@ define('facebook_oauth_app_secret','YOUR_APP_SECRET_ID');
 define('facebook_oauth_redirect_uri','http://localhost/phplogin/facebook-oauth.php');
 
 /* Session Settings */
-// Session timeout in seconds (e.g., 1800 = 60 minutes)
+// Session timeout in seconds (e.g., 1800 = 30 minutes, 3600 = 60 minutes)
 define('session_timeout', 3600);
 
 // Uncomment the below to output all errors
