@@ -1,8 +1,8 @@
 <?php
+include 'main.php';
 $page_title = 'Member Register';
 $page = 'No Header';
 require_once 'header.php';
-include 'main.php';
 // No need for the user to see the login form if they're logged-in, so redirect them to the home page
 if (isset($_SESSION['account_loggedin'])) {
 	// If the user is not logged in, redirect to the home page.
@@ -12,6 +12,7 @@ if (isset($_SESSION['account_loggedin'])) {
 // Also check if they are "remembered"
 if (isset($_COOKIE['remember_me']) && !empty($_COOKIE['remember_me'])) {
 	// If the remember me cookie matches one in the database then we can update the session variables and the user will be logged-in.
+	global $pdo;
 	$stmt = $pdo->prepare('SELECT * FROM accounts WHERE remember_me_code = ?');
 	$stmt->execute([ $_COOKIE['remember_me'] ]);
 	$account = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -60,6 +61,14 @@ $_SESSION['token'] = hash('sha256', uniqid(rand(), true));
                                 </svg>
                             </div>
                         </div>
+                        <div class="mb-3">
+                            <div class="password-strength-meter">
+                                <div class="progress" style="height: 8px;">
+                                    <div id="password-strength-bar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div id="password-strength-text" class="mt-1 small text-muted">Password strength: <span>None</span></div>
+                            </div>
+                        </div>
 
                         <div class="mb-3 input-group">
                             <input type="password" class="form-control"  name="cpassword" placeholder="Confirm password" id="cpassword" required/>
@@ -88,96 +97,6 @@ $_SESSION['token'] = hash('sha256', uniqid(rand(), true));
 
                     </form>
 
-                    <script>
-                        // Password validation function
-                        function validatePassword(password) {
-                            const errors = [];
-
-                            // Check length
-                            if (password.length < 8 || password.length > 20) {
-                                errors.push("Password must be between 8 and 20 characters long.");
-                            }
-
-                            // Check for uppercase letter
-                            if (!/[A-Z]/.test(password)) {
-                                errors.push("Password must contain at least one uppercase letter.");
-                            }
-
-                            // Check for lowercase letter
-                            if (!/[a-z]/.test(password)) {
-                                errors.push("Password must contain at least one lowercase letter.");
-                            }
-
-                            // Check for number
-                            if (!/[0-9]/.test(password)) {
-                                errors.push("Password must contain at least one number.");
-                            }
-
-                            // Check for special character
-                            if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-                                errors.push("Password must contain at least one special character (!@#$%^&*(),.?\":{}|<>).");
-                            }
-
-                            return errors;
-                        }
-
-                        // Add event listener to password field
-                        const passwordField = document.getElementById('password');
-                        const msgDiv = document.querySelector('.msg');
-
-                        passwordField.addEventListener('input', function() {
-                            const password = this.value;
-                            const errors = validatePassword(password);
-
-                            if (password.length > 0) {
-                                if (errors.length > 0) {
-                                    msgDiv.classList.remove('alert-success');
-                                    msgDiv.classList.add('mt-2', 'alert', 'alert-danger');
-                                    msgDiv.innerHTML = "<strong>Password Requirements:</strong><ul style='margin-bottom: 0; padding-left: 20px;'>" + 
-                                        errors.map(error => "<li>" + error + "</li>").join('') + "</ul>";
-                                } else {
-                                    msgDiv.classList.remove('alert-danger');
-                                    msgDiv.classList.add('mt-2', 'alert', 'alert-success');
-                                    msgDiv.innerHTML = "Password meets all requirements!";
-                                }
-                            } else {
-                                msgDiv.innerHTML = "";
-                                msgDiv.classList.remove('mt-2', 'alert', 'alert-danger', 'alert-success');
-                            }
-                        });
-
-                        // AJAX code
-                        const registrationForm = document.querySelector('.register-form');
-                        registrationForm.onsubmit = event => {
-                            event.preventDefault();
-
-                            // Validate password before submission
-                            const password = passwordField.value;
-                            const errors = validatePassword(password);
-
-                            if (errors.length > 0) {
-                                msgDiv.classList.remove('alert-success');
-                                msgDiv.classList.add('mt-2', 'alert', 'alert-danger');
-                                msgDiv.innerHTML = "<strong>Please fix the following issues:</strong><ul style='margin-bottom: 0; padding-left: 20px;'>" + 
-                                    errors.map(error => "<li>" + error + "</li>").join('') + "</ul>";
-                                return;
-                            }
-
-                            fetch(registrationForm.action, { method: 'POST', body: new FormData(registrationForm), cache: 'no-store' }).then(response => response.text()).then(result => {
-                                if (result.toLowerCase().includes('success:')) {
-                                    registrationForm.querySelector('.msg').classList.remove('mt-2','alert','alert-danger','alert-success');
-                                    registrationForm.querySelector('.msg').classList.add('mt-2','alert','alert-success');
-                                    registrationForm.querySelector('.msg').innerHTML = result.replace('Success: ', '');
-                                } else if (result.toLowerCase().includes('redirect:')) {
-                                    window.location.href = result.replace('Redirect:', '').trim();
-                                } else {
-                                    registrationForm.querySelector('.msg').classList.remove('mt-2','alert','alert-danger','alert-success');
-                                    registrationForm.querySelector('.msg').classList.add('mt-2','alert','alert-danger');
-                                    registrationForm.querySelector('.msg').innerHTML = result.replace('Error: ', '');
-                                }
-                            });
-                        };
-                    </script>
                 </div>
             </div>
             <div class="offset-1 col-lg-4 d-lg-flex align-items-center">
