@@ -6,7 +6,7 @@ This script utilizes Brute Force and CSRF protections, as well as being able to 
 OAuth logins.
 
 ### Current Date
-`2025-07-19`
+`2025-07-27`
 
 ## Admin Files
 - `admin.js`
@@ -27,6 +27,7 @@ OAuth logins.
 - `contact-email-template.html`
 - `notification-email-template.html`
 - `resetpass-email-template.html`
+- `twofactor-email-template.html`
 - `README.md`
 - `about.php`
 - `activate.php`
@@ -43,11 +44,13 @@ OAuth logins.
 - `login.php`
 - `logout.php`
 - `main.php`
+- `password-expired.php`
 - `profile.php`
 - `register.php`
 - `register-process.php`
 - `resend-activation.php`
 - `reset-password.php`
+- `twofactor.php`
 - `mysql.sql`
 
 ## PHP User Login and Registration System with MySQL
