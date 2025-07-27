@@ -65,6 +65,14 @@ details from the 'edit profile' link in their dashboard.
 You can add, edit and delete users through the admin panel, or users can register on the website itself.
 The script will check to see if the email address has already been used. You can have as many members or admins as you need.
 
+## Password Requirements
+For security purposes, all passwords must meet the following requirements:
+- Between 8 and 20 characters long
+- At least one uppercase letter
+- At least one lowercase letter
+- At least one number
+- At least one special character (!@#$%^&*(),.?":{}|<>)
+
 ## Google OAuth Sign In
 For google oauth to work you need to configure oauth in your google workspace dashboard, then replace the following in config.php:
 

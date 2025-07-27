@@ -18,9 +18,25 @@ if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
 if (!preg_match('/^[a-zA-Z0-9]+$/', $_POST['username'])) {
     exit('Error: Username must contain only letters and numbers!');
 }
-// Password must be between 5 and 20 characters long.
-if (strlen($_POST['password']) > 20 || strlen($_POST['password']) < 5) {
-	exit('Error: Password must be between 5 and 20 characters long!');
+// Password must meet complexity requirements
+if (strlen($_POST['password']) > 20 || strlen($_POST['password']) < 8) {
+	exit('Error: Password must be between 8 and 20 characters long!');
+}
+// Check for at least one uppercase letter
+if (!preg_match('/[A-Z]/', $_POST['password'])) {
+	exit('Error: Password must contain at least one uppercase letter!');
+}
+// Check for at least one lowercase letter
+if (!preg_match('/[a-z]/', $_POST['password'])) {
+	exit('Error: Password must contain at least one lowercase letter!');
+}
+// Check for at least one number
+if (!preg_match('/[0-9]/', $_POST['password'])) {
+	exit('Error: Password must contain at least one number!');
+}
+// Check for at least one special character
+if (!preg_match('/[!@#$%^&*(),.?":{}|<>]/', $_POST['password'])) {
+	exit('Error: Password must contain at least one special character (!@#$%^&*(),.?":{}|<>)!');
 }
 // Check if both the password and confirm password fields match
 if ($_POST['cpassword'] != $_POST['password']) {
@@ -39,7 +55,7 @@ if ($account) {
 	// We do not want to expose passwords in our database, so hash the password and use password_verify when a user logs in.
 	$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 	// Generate unique activation code
-	$activation_code = account_activation ? hash('sha256', uniqid() . $_POST['email'] . secret_key) : 'activated';
+	$activation_code = account_activation ? hash('sha256', uniqid('', true) . $_POST['email'] . secret_key) : 'activated';
 	// Approval required?
 	$approved = account_approval ? 0 : 1;
 	// Default role

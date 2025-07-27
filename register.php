@@ -89,10 +89,80 @@ $_SESSION['token'] = hash('sha256', uniqid(rand(), true));
                     </form>
 
                     <script>
+                        // Password validation function
+                        function validatePassword(password) {
+                            const errors = [];
+
+                            // Check length
+                            if (password.length < 8 || password.length > 20) {
+                                errors.push("Password must be between 8 and 20 characters long.");
+                            }
+
+                            // Check for uppercase letter
+                            if (!/[A-Z]/.test(password)) {
+                                errors.push("Password must contain at least one uppercase letter.");
+                            }
+
+                            // Check for lowercase letter
+                            if (!/[a-z]/.test(password)) {
+                                errors.push("Password must contain at least one lowercase letter.");
+                            }
+
+                            // Check for number
+                            if (!/[0-9]/.test(password)) {
+                                errors.push("Password must contain at least one number.");
+                            }
+
+                            // Check for special character
+                            if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+                                errors.push("Password must contain at least one special character (!@#$%^&*(),.?\":{}|<>).");
+                            }
+
+                            return errors;
+                        }
+
+                        // Add event listener to password field
+                        const passwordField = document.getElementById('password');
+                        const msgDiv = document.querySelector('.msg');
+
+                        passwordField.addEventListener('input', function() {
+                            const password = this.value;
+                            const errors = validatePassword(password);
+
+                            if (password.length > 0) {
+                                if (errors.length > 0) {
+                                    msgDiv.classList.remove('alert-success');
+                                    msgDiv.classList.add('mt-2', 'alert', 'alert-danger');
+                                    msgDiv.innerHTML = "<strong>Password Requirements:</strong><ul style='margin-bottom: 0; padding-left: 20px;'>" + 
+                                        errors.map(error => "<li>" + error + "</li>").join('') + "</ul>";
+                                } else {
+                                    msgDiv.classList.remove('alert-danger');
+                                    msgDiv.classList.add('mt-2', 'alert', 'alert-success');
+                                    msgDiv.innerHTML = "Password meets all requirements!";
+                                }
+                            } else {
+                                msgDiv.innerHTML = "";
+                                msgDiv.classList.remove('mt-2', 'alert', 'alert-danger', 'alert-success');
+                            }
+                        });
+
                         // AJAX code
                         const registrationForm = document.querySelector('.register-form');
                         registrationForm.onsubmit = event => {
                             event.preventDefault();
+
+                            // Validate password before submission
+                            const password = passwordField.value;
+                            const errors = validatePassword(password);
+
+                            if (errors.length > 0) {
+                                msgDiv.classList.remove('alert-success');
+                                msgDiv.classList.add('mt-2', 'alert', 'alert-danger');
+                                msgDiv.innerHTML = "<strong>Please fix the following issues:</strong><ul style='margin-bottom: 0; padding-left: 20px;'>" + 
+                                    errors.map(error => "<li>" + error + "</li>").join('') + "</ul>";
+                                return;
+                            }
+
                             fetch(registrationForm.action, { method: 'POST', body: new FormData(registrationForm), cache: 'no-store' }).then(response => response.text()).then(result => {
                                 if (result.toLowerCase().includes('success:')) {
                                     registrationForm.querySelector('.msg').classList.remove('mt-2','alert','alert-danger','alert-success');
