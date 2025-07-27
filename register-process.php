@@ -1,5 +1,7 @@
 <?php
 include 'main.php';
+// Make sure $pdo is accessible
+global $pdo;
 // Now we check if the data was submitted, isset() function will check if the data exists.
 if (!isset($_POST['username'], $_POST['password'], $_POST['cpassword'], $_POST['email'])) {
 	// Could not get the data that should have been sent.
@@ -63,9 +65,9 @@ if ($account) {
 	// Current date
 	$date = date('Y-m-d\TH:i:s');
 	// Prepare query; prevents SQL injection
-    $stmt = $pdo->prepare('INSERT INTO accounts (username, password, email, activation_code, role, registered, last_seen, approved, ip) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    $stmt = $pdo->prepare('INSERT INTO accounts (username, password, email, activation_code, role, registered, last_seen, approved, ip, password_changed) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
     $ip = $_SERVER['REMOTE_ADDR'];
-    $stmt->execute([ $_POST['username'], $password, $_POST['email'], $activation_code, $role, $date, $date, $approved, $ip ]);
+    $stmt->execute([ $_POST['username'], $password, $_POST['email'], $activation_code, $role, $date, $date, $approved, $ip, $date ]);
 	// Get last insert ID
 	$id = $pdo->lastInsertId();
 	// Send notification email

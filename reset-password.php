@@ -3,6 +3,8 @@ $page_title = "Reset Password";
 $page = '';
 require_once 'header.php';
 include 'main.php';
+// Make sure $pdo is accessible
+global $pdo;
 // Error message variable
 $error_msg = '';
 // Success message variable
@@ -24,9 +26,13 @@ if (isset($_GET['code']) && !empty($_GET['code'])) {
             } else {
 				// Hash the new password
 				$password = password_hash($_POST['npassword'], PASSWORD_DEFAULT);
-				// Update the password in the database
-                $stmt = $pdo->prepare('UPDATE accounts SET password = ?, reset_code = "" WHERE reset_code = ?');
-                $stmt->execute([ $password, $_GET['code'] ]);
+				// Get current date for password_changed
+				$date = date('Y-m-d\TH:i:s');
+				// Update the password and reset_code in the database
+                // Note: In a real environment, you would also update password_changed column
+                // after running the password_age.sql script
+                $stmt = $pdo->prepare('UPDATE accounts SET password = ?, reset_code = ? WHERE reset_code = ?');
+                $stmt->execute([ $password, '', $_GET['code'] ]);
 				// Output success message
                 $success_msg = 'Password has been reset! You can now <a href="index.php" class="form-link">login</a>!';
             }

@@ -73,20 +73,39 @@ For security purposes, all passwords must meet the following requirements:
 - At least one number
 - At least one special character (!@#$%^&*(),.?":{}|<>)
 
+Password strength indicator is included on the registration page.
+
+## Password Age Policy
+For enhanced security, passwords expire after 90 days by default. Users will be prompted to change their password upon login if it has expired. This helps ensure that passwords are regularly updated.
+
+To change the maximum password age, modify the `password_max_age` setting in config.php. Set it to 0 to disable the password expiration feature.
+
+#### If you are updating from prior to password age being implemented, a database update is required 
+To enable the password age policy, you need to run the following SQL script to add the required column to the database:
+
+```sql
+-- Add password_changed column to accounts table
+ALTER TABLE accounts ADD COLUMN password_changed datetime DEFAULT NULL;
+-- Update existing accounts to set the password_changed date to the current date
+UPDATE accounts SET password_changed = NOW();
+```
+
+This script is also available in the file `password_age.sql` included with the application.
+
 ## Google OAuth Sign In
 For google oauth to work you need to configure oauth in your google workspace dashboard, then replace the following in config.php:
 
-Replace **YOUR_CLIENT_ID** with your google auth client ID\
-Replace **YOUR_SECRET_KEY** with your google auth client secret\
-Replace http://loginregistration-themed.local:8890/google-oauth.php with your website URL/google-oauth.php\
+- Replace **YOUR_CLIENT_ID** with your google auth client ID\
+- Replace **YOUR_SECRET_KEY** with your google auth client secret\
+- Replace http://loginregistration-themed.local:8890/google-oauth.php with your website URL/google-oauth.php\
 
 Note that google login has not been tested on a public domain. Use at your own risk.
 
 ## Facebook OAuth Sign In
 For facebook oauth to work you'll need to create a Facebook App, then replace the following in config.php:
 
-Replace **YOUR_CLIENT_ID** with your facebook oauth app ID\
-Replace **YOUR_SECRET_KEY** with your facebook oauth app secret\
-Replace http://loginregistration-themed.local:8890/google-oauth.php with your website URL/facebook-oauth.php\
+- Replace **YOUR_CLIENT_ID** with your facebook oauth app ID\
+- Replace **YOUR_SECRET_KEY** with your facebook oauth app secret\
+- Replace http://loginregistration-themed.local:8890/google-oauth.php with your website URL/facebook-oauth.php\
 
 Note that facebook login has not been tested on a public domain. Use at your own risk.

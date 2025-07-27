@@ -1,5 +1,7 @@
 <?php
 include 'main.php';
+// Make sure $pdo is accessible
+global $pdo;
 // check CSRF token
 if (!isset($_POST['token']) || $_POST['token'] != $_SESSION['token']) {
     exit('Error: Incorrect token provided!');
@@ -38,7 +40,20 @@ if ($account) {
             // Two-factor authentication required
             $_SESSION['tfa_id'] = $account['id'];
             echo 'tfa: twofactor.php';
-		} else {
+		} else if (password_max_age > 0 && isset($account['password_changed'])) {
+            // Check if password has expired
+            $password_changed_date = new DateTime($account['password_changed']);
+            $current_date = new DateTime();
+            $interval = $password_changed_date->diff($current_date);
+            $days_since_change = $interval->days;
+
+            if ($days_since_change >= password_max_age) {
+                // Password has expired, set up temporary session and redirect
+                $_SESSION['password_expired_id'] = $account['id'];
+                echo 'Redirect: password-expired.php';
+                exit;
+            }
+        } else {
 			// Verification success! User has loggedin!
 			// Declare the session variables, which will basically act like cookies, but will store the data on the server as opposed to the client
 			session_regenerate_id();
