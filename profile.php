@@ -22,8 +22,8 @@ if (isset($_POST['username'], $_POST['npassword'], $_POST['cpassword'], $_POST['
 		$error_msg = 'Please provide a valid email address!';
 	} else if (!preg_match('/^[a-zA-Z0-9]+$/', $_POST['username'])) {
 	    $error_msg = 'Username must contain only letters and numbers!';
-	} else if (!empty($_POST['npassword']) && (strlen($_POST['npassword']) > 20 || strlen($_POST['npassword']) < 5)) {
-		$error_msg = 'Password must be between 5 and 20 characters long!';
+	} else if (!empty($_POST['npassword']) && (strlen($_POST['npassword']) > 24 || strlen($_POST['npassword']) < 8)) {
+		$error_msg = 'Password must be between 8 and 24 characters long!';
 	} else if ($_POST['cpassword'] != $_POST['npassword']) {
 		$error_msg = 'Passwords do not match!';
 	}
@@ -194,7 +194,7 @@ if (isset($_POST['username'], $_POST['npassword'], $_POST['cpassword'], $_POST['
                         </div>
                         <div class="row mb-2">
                             <div class="col-sm-4">
-                                <p class="mb-0"><strong>X</strong></p>
+                                <p class="mb-0"><strong>Twitter</strong></p>
                             </div>
                             <div class="col-sm-8">
                                 <p class="text-muted mb-0"><?=htmlspecialchars($account['twitter'], ENT_QUOTES)?></p>

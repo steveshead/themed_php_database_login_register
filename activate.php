@@ -29,8 +29,8 @@ if (isset($_GET['code']) && !empty($_GET['code'])) {
 
     <div class="container py-5">
         <div class="row">
-            <div class="col-lg-6 offset-3">
-                <h1>Activate Account</h1>
+            <div class="col-lg-4 offset-4">
+                <h1 class="text-center mb-3">Activate Account</h1>
 
                 <div class="form register-form">
 

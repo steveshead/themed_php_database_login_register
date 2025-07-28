@@ -27,6 +27,7 @@ OAuth logins.
 - `contact-email-template.html`
 - `notification-email-template.html`
 - `resetpass-email-template.html`
+- `twofactor-email-template.html`
 - `README.md`
 - `about.php`
 - `activate.php`
@@ -48,6 +49,7 @@ OAuth logins.
 - `register-process.php`
 - `resend-activation.php`
 - `reset-password.php`
+- `twofactor.php`
 - `mysql.sql`
 
 ## PHP User Login and Registration System with MySQL

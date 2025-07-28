@@ -18,9 +18,16 @@ if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
 if (!preg_match('/^[a-zA-Z0-9]+$/', $_POST['username'])) {
     exit('Error: Username must contain only letters and numbers!');
 }
-// Password must be between 5 and 20 characters long.
-if (strlen($_POST['password']) > 20 || strlen($_POST['password']) < 5) {
-	exit('Error: Password must be between 5 and 20 characters long!');
+// Password must be between 8 and 24 characters long.
+$password=$_POST['password'];
+$uppercase   = preg_match('@[A-Z]@', $password);
+$lowercase   = preg_match('@[a-z]@', $password);
+$specialChars = preg_match('@[^\w]@', $password);
+
+if(!$uppercase || !$lowercase || !$specialChars || strlen($password) > 24 || strlen($password) < 8) {
+    exit('Error: Password should include at least one upper case and one lower case character, one number and one special character, and be between 8 and 24 characters!');
+} else {
+    echo 'Strong password! ';
 }
 // Check if both the password and confirm password fields match
 if ($_POST['cpassword'] != $_POST['password']) {
