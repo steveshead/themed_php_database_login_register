@@ -2,8 +2,6 @@
 $page_title = 'Profile Page';
 $page = '';
 include 'main.php';
-// Make sure $pdo is accessible
-global $pdo;
 require_once 'header.php';
 // Check logged-in
 check_loggedin($pdo);
@@ -39,37 +37,13 @@ if (isset($_POST['username'], $_POST['npassword'], $_POST['cpassword'], $_POST['
 			$error_msg = 'Account already exists with that username and/or email!';
 		} else {
 			// No errors occurred, update the account...
-			// Check if password has been changed
-			$password_changed = !empty($_POST['npassword']);
 			// Hash the new password if it was posted and is not blank
-			$password = $password_changed ? password_hash($_POST['npassword'], PASSWORD_DEFAULT) : $account['password'];
+			$password = !empty($_POST['npassword']) ? password_hash($_POST['npassword'], PASSWORD_DEFAULT) : $account['password'];
 			// If email has changed, generate a new activation code
-			$activation_code = account_activation && $account['email'] != $_POST['email'] ? hash('sha256', uniqid('', true) . $_POST['email'] . secret_key) : $account['activation_code'];
-
-			// Get current date for password_changed if password was updated
-			$date = date('Y-m-d\TH:i:s');
-
-			// Note: In a real environment, you would also update password_changed column
-			// after running the password_age.sql script. The following code assumes the
-			// column exists, but will be ignored if it doesn't.
-
+			$activation_code = account_activation && $account['email'] != $_POST['email'] ? hash('sha256', uniqid() . $_POST['email'] . secret_key) : $account['activation_code'];
 			// Update the account
 			$stmt = $pdo->prepare('UPDATE accounts SET first_name = ?, last_name = ?, username = ?, password = ?, email = ?, occupation = ?, motto = ?, location = ?, facebook = ?, instagram = ?, twitter = ?, activation_code = ? WHERE id = ?');
 			$stmt->execute([ $_POST['first_name'], $_POST['last_name'], $_POST['username'], $password, $_POST['email'], $_POST['occupation'], $_POST['motto'], $_POST['location'], $_POST['facebook'], $_POST['instagram'], $_POST['twitter'], $activation_code, $_SESSION['account_id'] ]);
-
-			// If password was changed, update the password_changed date
-			// This is commented out for now since the column doesn't exist yet
-			// In a real environment, you would uncomment this code after running password_age.sql
-			/*
-			if ($password_changed) {
-				try {
-					$stmt = $pdo->prepare('UPDATE accounts SET password_changed = ? WHERE id = ?');
-					$stmt->execute([$date, $_SESSION['account_id']]);
-				} catch (PDOException $e) {
-					// Ignore errors if the column doesn't exist yet
-				}
-			}
-			*/
 			// Update the session variables
 			$_SESSION['account_name'] = $_POST['username'];
 			$_SESSION['first_name'] = $_POST['first_name'];

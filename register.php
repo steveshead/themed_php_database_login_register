@@ -1,8 +1,8 @@
 <?php
-include 'main.php';
 $page_title = 'Member Register';
 $page = 'No Header';
 require_once 'header.php';
+include 'main.php';
 // No need for the user to see the login form if they're logged-in, so redirect them to the home page
 if (isset($_SESSION['account_loggedin'])) {
 	// If the user is not logged in, redirect to the home page.
@@ -12,7 +12,6 @@ if (isset($_SESSION['account_loggedin'])) {
 // Also check if they are "remembered"
 if (isset($_COOKIE['remember_me']) && !empty($_COOKIE['remember_me'])) {
 	// If the remember me cookie matches one in the database then we can update the session variables and the user will be logged-in.
-	global $pdo;
 	$stmt = $pdo->prepare('SELECT * FROM accounts WHERE remember_me_code = ?');
 	$stmt->execute([ $_COOKIE['remember_me'] ]);
 	$account = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -61,14 +60,6 @@ $_SESSION['token'] = hash('sha256', uniqid(rand(), true));
                                 </svg>
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <div class="password-strength-meter">
-                                <div class="progress" style="height: 8px;">
-                                    <div id="password-strength-bar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <div id="password-strength-text" class="mt-1 small text-muted">Password strength: <span>None</span></div>
-                            </div>
-                        </div>
 
                         <div class="mb-3 input-group">
                             <input type="password" class="form-control"  name="cpassword" placeholder="Confirm password" id="cpassword" required/>
@@ -97,6 +88,26 @@ $_SESSION['token'] = hash('sha256', uniqid(rand(), true));
 
                     </form>
 
+                    <script>
+                        // AJAX code
+                        const registrationForm = document.querySelector('.register-form');
+                        registrationForm.onsubmit = event => {
+                            event.preventDefault();
+                            fetch(registrationForm.action, { method: 'POST', body: new FormData(registrationForm), cache: 'no-store' }).then(response => response.text()).then(result => {
+                                if (result.toLowerCase().includes('success:')) {
+                                    registrationForm.querySelector('.msg').classList.remove('mt-2','alert','alert-danger','alert-success');
+                                    registrationForm.querySelector('.msg').classList.add('mt-2','alert','alert-success');
+                                    registrationForm.querySelector('.msg').innerHTML = result.replace('Success: ', '');
+                                } else if (result.toLowerCase().includes('redirect:')) {
+                                    window.location.href = result.replace('Redirect:', '').trim();
+                                } else {
+                                    registrationForm.querySelector('.msg').classList.remove('mt-2','alert','alert-danger','alert-success');
+                                    registrationForm.querySelector('.msg').classList.add('mt-2','alert','alert-danger');
+                                    registrationForm.querySelector('.msg').innerHTML = result.replace('Error: ', '');
+                                }
+                            });
+                        };
+                    </script>
                 </div>
             </div>
             <div class="offset-1 col-lg-4 d-lg-flex align-items-center">

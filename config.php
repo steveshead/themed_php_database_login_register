@@ -63,10 +63,6 @@ define('facebook_oauth_redirect_uri','http://localhost/phplogin/facebook-oauth.p
 // Session timeout in seconds (e.g., 1800 = 30 minutes, 3600 = 60 minutes)
 define('session_timeout', 3600);
 
-/* Password Settings */
-// Maximum password age in days (e.g., 90 = 3 months). Set to 0 to disable.
-define('password_max_age', 90);
-
 // Uncomment the below to output all errors
 // ini_set('log_errors', true);
 // ini_set('error_log', 'error.log');
