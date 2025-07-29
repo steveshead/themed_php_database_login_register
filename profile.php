@@ -15,15 +15,20 @@ $stmt->execute([ $_SESSION['account_id'] ]);
 $account = $stmt->fetch(PDO::FETCH_ASSOC);
 // Handle edit profile post data
 if (isset($_POST['username'], $_POST['npassword'], $_POST['cpassword'], $_POST['email'])) {
-	// Make sure the submitted registration values are not empty.
+    $password     = $_POST['npassword'];
+    $uppercase    = preg_match('@[A-Z]@', $password);
+    $lowercase    = preg_match('@[a-z]@', $password);
+    $specialChars = preg_match('@[^\w]@', $password);
+
+    // Make sure the submitted registration values are not empty.
 	if (empty($_POST['username']) || empty($_POST['email'])) {
 		$error_msg = 'The input fields must not be empty!';
 	} else if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
 		$error_msg = 'Please provide a valid email address!';
 	} else if (!preg_match('/^[a-zA-Z0-9]+$/', $_POST['username'])) {
 	    $error_msg = 'Username must contain only letters and numbers!';
-	} else if (!empty($_POST['npassword']) && (strlen($_POST['npassword']) > 24 || strlen($_POST['npassword']) < 8)) {
-		$error_msg = 'Password must be between 8 and 24 characters long!';
+	} else if (!empty($_POST['npassword']) && (!$uppercase || !$lowercase || !$specialChars || strlen($password) > 24 || strlen($password) < 8)) {
+		$error_msg = 'Password should include at least one upper case and one lower case character, one number and one special character, and be between 8 and 24 characters!';
 	} else if ($_POST['cpassword'] != $_POST['npassword']) {
 		$error_msg = 'Passwords do not match!';
 	}

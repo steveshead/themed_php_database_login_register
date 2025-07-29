@@ -351,7 +351,7 @@ $active_accounts_total = $pdo->query('SELECT COUNT(*) AS total FROM accounts WHE
             <tbody>
             <?php if (!$inactive_accounts_list): ?>
                 <tr>
-                    <td colspan="20" class="no-results">There are no active accounts.</td>
+                    <td colspan="20" class="no-results">There are no inactive accounts.</td>
                 </tr>
             <?php endif; ?>
             <?php foreach ($inactive_accounts_list as $account): ?>

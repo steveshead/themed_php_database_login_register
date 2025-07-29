@@ -63,7 +63,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex flex-column flex-sm-row justify-content-between pt-4 mt-4 border-top"> <p class="copyright">&copy; Copyright <?=date('Y')?> Company, Inc. All rights reserved.</p>
+                    <div class="d-flex flex-column flex-sm-row justify-content-between pt-4 mt-4 border-top">
+                        <a href="/">
+                            <img src="assets/logos/novus/novus.png" height="36" alt="">
+                        </a>
+                        <p class="copyright mt-2">&copy; Copyright <?=date('Y')?> Company, Inc. All rights reserved.</p>
                         <ul class="list-unstyled d-flex">
                             <li class="ms-3">
                                 <a class="link-body-emphasis" href="https://www.facebook.com/<?= isset($_SESSION['facebook']) ? htmlspecialchars($_SESSION['facebook'], ENT_QUOTES) : '' ?>" aria-label="Facebook">
