@@ -15,23 +15,35 @@ $stmt->execute([ $_SESSION['account_id'] ]);
 $account = $stmt->fetch(PDO::FETCH_ASSOC);
 // Handle edit profile post data
 if (isset($_POST['username'], $_POST['npassword'], $_POST['cpassword'], $_POST['email'])) {
-    $password     = $_POST['npassword'];
-    $uppercase    = preg_match('@[A-Z]@', $password);
-    $lowercase    = preg_match('@[a-z]@', $password);
-    $specialChars = preg_match('@[^\w]@', $password);
-
     // Make sure the submitted registration values are not empty.
-	if (empty($_POST['username']) || empty($_POST['email'])) {
-		$error_msg = 'The input fields must not be empty!';
-	} else if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-		$error_msg = 'Please provide a valid email address!';
-	} else if (!preg_match('/^[a-zA-Z0-9]+$/', $_POST['username'])) {
-	    $error_msg = 'Username must contain only letters and numbers!';
-	} else if (!empty($_POST['npassword']) && (!$uppercase || !$lowercase || !$specialChars || strlen($password) > 24 || strlen($password) < 8)) {
-		$error_msg = 'Password should include at least one upper case and one lower case character, one number and one special character, and be between 8 and 24 characters!';
-	} else if ($_POST['cpassword'] != $_POST['npassword']) {
-		$error_msg = 'Passwords do not match!';
-	}
+    if (empty($_POST['username']) || empty($_POST['email'])) {
+        $error_msg = 'The input fields must not be empty!';
+    } else if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        $error_msg = 'Please provide a valid email address!';
+    } else if (!preg_match('/^[a-zA-Z0-9]+$/', $_POST['username'])) {
+        $error_msg = 'Username must contain only letters and numbers!';
+    } else if (!empty($_POST['npassword'])) {
+        // Only validate password if one was entered
+        $password = $_POST['npassword'];
+        $uppercase = preg_match('@[A-Z]@', $password);
+        $lowercase = preg_match('@[a-z]@', $password);
+        $number = preg_match('@[0-9]@', $password);
+        $specialChars = preg_match('@[^\w]@', $password);
+
+        if (strlen($password) < 8 || strlen($password) > 24) {
+            $error_msg = 'Password must be between 8 and 24 characters long!';
+        } else if (!$uppercase) {
+            $error_msg = 'Password must contain at least one uppercase letter!';
+        } else if (!$lowercase) {
+            $error_msg = 'Password must contain at least one lowercase letter!';
+        } else if (!$number) {
+            $error_msg = 'Password must contain at least one number!';
+        } else if (!$specialChars) {
+            $error_msg = 'Password must contain at least one special character!';
+        } else if ($_POST['cpassword'] != $_POST['npassword']) {
+            $error_msg = 'Passwords do not match!';
+        }
+    }
 	// No validation errors... Process update
 	if (empty($error_msg)) {
 		// Check if new username or email already exists in the database

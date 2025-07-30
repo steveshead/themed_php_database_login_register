@@ -329,4 +329,24 @@ function send_twofactor_email($email, $code) {
 		exit('Error: Message could not be sent. Mailer Error: ' . $mail->ErrorInfo);
 	}
 }
+
+function validatePassword($password) {
+	$errors = [];
+	if (strlen($password) < 8 || strlen($password) > 24) {
+		$errors[] = "Password must be 8-24 characters long";
+	}
+	if (!preg_match('/[A-Z]/', $password)) {
+		$errors[] = "Password must contain at least one uppercase letter";
+	}
+	if (!preg_match('/[a-z]/', $password)) {
+		$errors[] = "Password must contain at least one lowercase letter";
+	}
+	if (!preg_match('/[0-9]/', $password)) {
+		$errors[] = "Password must contain at least one number";
+	}
+	if (!preg_match('/[^\w]/', $password)) {
+		$errors[] = "Password must contain at least one special character";
+	}
+	return $errors;
+}
 ?>
