@@ -51,4 +51,16 @@ footer h5 {
   text-decoration: none;
 }
 
+#passwordStrength {
+  height: 30px;
+  margin-top: 5px;
+  text-align: center;
+  color: white;
+  line-height: 20px;
+  font-size: 0.9em;
+  border-radius: 3px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
 /*# sourceMappingURL=main.css.map */

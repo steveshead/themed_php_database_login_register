@@ -18,6 +18,21 @@ if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
 if (!preg_match('/^[a-zA-Z0-9]+$/', $_POST['username'])) {
     exit('Error: Username must contain only letters and numbers!');
 }
+
+// Check if username already exists
+$stmt = $pdo->prepare('SELECT id FROM accounts WHERE username = ?');
+$stmt->execute([$_POST['username']]);
+if ($stmt->fetch()) {
+    exit('Error: Username already exists, please choose another!');
+}
+
+// Check if email already exists
+$stmt = $pdo->prepare('SELECT id FROM accounts WHERE email = ?');
+$stmt->execute([$_POST['email']]);
+if ($stmt->fetch()) {
+    exit('Error: Email address already registered, please use another!');
+}
+
 // Password must be between 8 and 24 characters long.
 $password = $_POST['password'];
 $passwordErrors = validatePassword($password);

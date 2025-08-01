@@ -349,4 +349,37 @@ function validatePassword($password) {
 	}
 	return $errors;
 }
+
+function checkPasswordStrength($password) {
+	$score = 0;
+
+	// Check length
+	if (strlen($password) >= 8) {
+		$score += 2;
+	} elseif (strlen($password) >= 6) {
+		$score += 1;
+	}
+
+	// Check for uppercase letters
+	if (preg_match('/[A-Z]/', $password)) {
+		$score += 1;
+	}
+
+	// Check for lowercase letters
+	if (preg_match('/[a-z]/', $password)) {
+		$score += 1;
+	}
+
+	// Check for numbers
+	if (preg_match('/[0-9]/', $password)) {
+		$score += 1;
+	}
+
+	// Check for special characters
+	if (preg_match('/[^A-Za-z0-9]/', $password)) {
+		$score += 1;
+	}
+
+	return $score; // You can define thresholds for "weak," "medium," "strong" based on this score
+}
 ?>

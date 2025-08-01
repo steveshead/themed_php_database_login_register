@@ -76,7 +76,6 @@ if (isset($_SESSION['tfa_id'])) {
                             </div>
                         </div>
 
-
                         <?php if ($msg): ?>
                             <div class="msg alert alert-danger">
                                 <?=$msg?>
@@ -91,4 +90,4 @@ if (isset($_SESSION['tfa_id'])) {
         </div>
     </section>
 
-<?= require 'footer.php'; ?>
+<?php require 'footer.php'; ?>

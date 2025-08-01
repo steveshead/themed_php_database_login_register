@@ -79,6 +79,8 @@ $_SESSION['token'] = hash('sha256', uniqid(rand(), true));
                               </span>
                         </div>
 
+                        <div id="passwordStrength" class="passwordStrength"></div>
+
                         <input type="hidden" name="token" value="<?=$_SESSION['token']?>">
                         <div class="msg alert mb-2"></div>
 
