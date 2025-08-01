@@ -297,8 +297,6 @@ if (isset($_POST['username'], $_POST['npassword'], $_POST['cpassword'], $_POST['
                         <input class="form-control" type="text" name="twitter" placeholder="twitter" id="twitter" value="<?=htmlspecialchars($account['twitter'], ENT_QUOTES)?>">
                     </div>
 
-                    <div id="passwordStrength" class="passwordStrength"></div>
-
                     <?php if ($error_msg): ?>
                     <div class="alert alert-danger">
                         <?=$error_msg?>
@@ -315,6 +313,8 @@ if (isset($_POST['username'], $_POST['npassword'], $_POST['cpassword'], $_POST['
                         <a href="profile.php" class="btn btn-outline-secondary">View Profile</a>
                     </div>
 
+                    <div id="passwordStrength" class="passwordStrength"></div>
+
                 </form>
             </div>
             <div class="col-lg-4">
@@ -326,4 +326,4 @@ if (isset($_POST['username'], $_POST['npassword'], $_POST['cpassword'], $_POST['
 
 <?php endif; ?>
 
-<?= require 'footer.php'; ?>
+<?php require 'footer.php'; ?>

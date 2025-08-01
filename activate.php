@@ -43,4 +43,4 @@ if (isset($_GET['code']) && !empty($_GET['code'])) {
         </div>
     </div>
 
-<?= require 'footer.php'; ?>
+<?php require 'footer.php'; ?>

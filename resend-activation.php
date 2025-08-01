@@ -56,4 +56,4 @@ if (isset($_POST['email'])) {
     </div>
 </section>
 
-<?= require 'footer.php'; ?>
+<?php require 'footer.php'; ?>

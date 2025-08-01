@@ -350,5 +350,5 @@ if (isset($_POST['submit'])) {
           </form>
         </div>
       </section>
-                        
-<?= require 'footer.php'; ?>
+
+<?php require 'footer.php'; ?>

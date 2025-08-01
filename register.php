@@ -119,4 +119,4 @@ $_SESSION['token'] = hash('sha256', uniqid(rand(), true));
     </div>
 </section>
 
-<?= require 'footer.php'; ?>
+<?php require 'footer.php'; ?>

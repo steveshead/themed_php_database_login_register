@@ -282,4 +282,4 @@ if (isset($_POST['x'])) {
 <script src="js/jcrop_bits.js"></script>
 <script src="js/jquery.Jcrop.js"></script>
 
-<?php include 'footer.php'; ?>
+<?php require 'footer.php'; ?>

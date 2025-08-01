@@ -126,4 +126,4 @@ require_once 'header.php';
             </div>
         </section>
 
-<?= require 'footer.php'; ?>
+<?php require 'footer.php'; ?>

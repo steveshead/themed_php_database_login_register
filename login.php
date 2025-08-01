@@ -148,4 +148,4 @@ if (isset($_GET['timeout']) && $_GET['timeout'] == 1) {
     </script>
 </section>
 
-<?= require 'footer.php'; ?>
+<?php require 'footer.php'; ?>
