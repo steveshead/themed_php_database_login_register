@@ -19,19 +19,15 @@ if (!preg_match('/^[a-zA-Z0-9]+$/', $_POST['username'])) {
     exit('Error: Username must contain only letters and numbers!');
 }
 
-// Check if username already exists
-$stmt = $pdo->prepare('SELECT id FROM accounts WHERE username = ?');
-$stmt->execute([$_POST['username']]);
-if ($stmt->fetch()) {
-    exit('Error: Username already exists, please choose another!');
-}
-
-// Check if email already exists
-$stmt = $pdo->prepare('SELECT id FROM accounts WHERE email = ?');
-$stmt->execute([$_POST['email']]);
-if ($stmt->fetch()) {
-    exit('Error: Email address already registered, please use another!');
-}
+// Check if the account with that username already exists
+    $stmt = $pdo->prepare('SELECT * FROM accounts WHERE username = ? OR email = ?');
+    $stmt->execute([ $_POST['username'], $_POST['email'] ]);
+    $account = $stmt->fetch(PDO::FETCH_ASSOC);
+// Store the result, so we can check if the account exists in the database.
+    if ($account) {
+        // Username already exists
+        exit ('Error: Username and/or email exists!<br>');
+    }
 
 // Password must be between 8 and 24 characters long.
 $password = $_POST['password'];
@@ -45,15 +41,6 @@ if (!empty($passwordErrors)) {
     // Check if both the password and confirm password fields match
     if ($_POST['cpassword'] != $_POST['password']) {
         exit('Error: Passwords do not match!');
-    }
-// Check if the account with that username already exists
-    $stmt = $pdo->prepare('SELECT * FROM accounts WHERE username = ? OR email = ?');
-    $stmt->execute([ $_POST['username'], $_POST['email'] ]);
-    $account = $stmt->fetch(PDO::FETCH_ASSOC);
-// Store the result, so we can check if the account exists in the database.
-    if ($account) {
-        // Username already exists
-        echo 'Error: Username and/or email exists!';
     } else {
         // Username doesnt exist, insert new account
         // We do not want to expose passwords in our database, so hash the password and use password_verify when a user logs in.

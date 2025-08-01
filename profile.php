@@ -253,49 +253,51 @@ if (isset($_POST['username'], $_POST['npassword'], $_POST['cpassword'], $_POST['
                     </div>
 
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="npassword">New Password</span>
+                        <span class="input-group-text">New Password</span>
                         <input class="form-control" type="password" name="npassword" id="npassword" autocomplete="new-password">
                     </div>
 
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="cpassword">Confirm Password</span>
+                        <span class="input-group-text">Confirm Password</span>
                         <input class="form-control" type="password" name="cpassword" id="cpassword" autocomplete="new-password">
                     </div>
 
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="email">Email Address</span>
+                        <span class="input-group-text">Email Address</span>
                         <input class="form-control" type="email" name="email" placeholder="Email Address" id="email" value="<?=htmlspecialchars($account['email'], ENT_QUOTES)?>" required>
                     </div>
 
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="occupation">Occupation</span>
+                        <span class="input-group-text">Occupation</span>
                         <input class="form-control" type="text" name="occupation" placeholder="Occupation" id="occupation" value="<?=htmlspecialchars($account['occupation'], ENT_QUOTES)?>">
                     </div>
 
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="motto">Motto</span>
+                        <span class="input-group-text">Motto</span>
                         <input class="form-control" type="text" name="motto" placeholder="Motto" id="motto" value="<?=htmlspecialchars($account['motto'], ENT_QUOTES)?>">
                     </div>
 
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="location">Location</span>
+                        <span class="input-group-text">Location</span>
                         <input class="form-control" type="text" name="location" placeholder="Location" id="location" value="<?=htmlspecialchars($account['location'], ENT_QUOTES)?>">
                     </div>
 
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="facebook">Facebook</span>
+                        <span class="input-group-text">Facebook</span>
                         <input class="form-control" type="text" name="facebook" placeholder="Facebook" id="facebook" value="<?=htmlspecialchars($account['facebook'], ENT_QUOTES)?>">
                     </div>
 
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="instagram">Instagram</span>
+                        <span class="input-group-text">Instagram</span>
                         <input class="form-control" type="text" name="instagram" placeholder="instagram" id="instagram" value="<?=htmlspecialchars($account['instagram'], ENT_QUOTES)?>">
                     </div>
 
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="twitter">Twitter</span>
+                        <span class="input-group-text">Twitter</span>
                         <input class="form-control" type="text" name="twitter" placeholder="twitter" id="twitter" value="<?=htmlspecialchars($account['twitter'], ENT_QUOTES)?>">
                     </div>
+
+                    <div id="passwordStrength" class="passwordStrength"></div>
 
                     <?php if ($error_msg): ?>
                     <div class="alert alert-danger">

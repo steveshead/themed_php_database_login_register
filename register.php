@@ -82,7 +82,7 @@ $_SESSION['token'] = hash('sha256', uniqid(rand(), true));
                         <div id="passwordStrength" class="passwordStrength"></div>
 
                         <input type="hidden" name="token" value="<?=$_SESSION['token']?>">
-                        <div class="msg alert mb-2"></div>
+                        <div class="msg"></div>
 
                         <button class="btn btn-primary mb-2" type="submit">Register</button>
 
