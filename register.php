@@ -35,8 +35,8 @@ if (isset($_COOKIE['remember_me']) && !empty($_COOKIE['remember_me'])) {
 $_SESSION['token'] = hash('sha256', uniqid(rand(), true));
 ?>
 <section class="py-5">
-    <div class="container pb-5">
-        <div class="row pt-4">
+    <div class="container pb-5 pt-4">
+        <div class="row">
             <div class="col-md-4 offset-1">
                 <div class="register">
 
@@ -79,7 +79,7 @@ $_SESSION['token'] = hash('sha256', uniqid(rand(), true));
                               </span>
                         </div>
 
-                        <div id="passwordStrength" class="passwordStrength"></div>
+                        <div id="passwordStrength" class="passwordStrength" style="display: none;"></div>
 
                         <input type="hidden" name="token" value="<?=$_SESSION['token']?>">
                         <div class="msg"></div>

@@ -86,7 +86,7 @@ if (isset($_POST['username'], $_POST['npassword'], $_POST['cpassword'], $_POST['
 
 <!-- View Profile Page -->
     <section class="py-5">
-        <div class="container py-5">
+        <div class="container">
             <div class="row">
                 <div class="col-lg-4 offset-lg-2">
                     <div class="text-center">
@@ -226,7 +226,7 @@ if (isset($_POST['username'], $_POST['npassword'], $_POST['cpassword'], $_POST['
 
 <!-- Edit Profile Page -->
 <section class="edit-profile py-5">
-    <div class="container py-5">
+    <div class="container">
         <div class="row mb-2">
             <div class="col-lg-12">
                 <h2 class="fw-light text-center mb-3">Update Profile</h2>
@@ -234,21 +234,24 @@ if (isset($_POST['username'], $_POST['npassword'], $_POST['cpassword'], $_POST['
         </div>
 
         <div class="row">
-            <div class="col-lg-4 offset-2">
+            <div class="col-lg-4">
+                <img width="375" class="border rounded p-2 shadow-sm" src="<?= !empty($account['avatar']) ? htmlspecialchars($account['avatar'], ENT_QUOTES) : '/images/avatar/default_avatar.png' ?>">
+            </div>
+            <div class="col-lg-4">
                 <form action="profile.php?action=edit" method="post" class="form form-small">
 
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="first_name">First Name</span>
+                        <span class="input-group-text">First Name</span>
                         <input class="form-control" type="text" name="first_name" placeholder="First Name" id="first_name" value="<?=htmlspecialchars($account['first_name'], ENT_QUOTES)?>">
                     </div>
 
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="last_name">Last Name</span>
+                        <span class="input-group-text">Last Name</span>
                         <input class="form-control" type="text" name="last_name" placeholder="Last Name" id="last_name" value="<?=htmlspecialchars($account['last_name'], ENT_QUOTES)?>">
                     </div>
 
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="username">Username</span>
+                        <span class="input-group-text">Username</span>
                         <input class="form-control" type="text" name="username" placeholder="Username" id="username" value="<?=htmlspecialchars($account['username'], ENT_QUOTES)?>">
                     </div>
 
@@ -267,6 +270,10 @@ if (isset($_POST['username'], $_POST['npassword'], $_POST['cpassword'], $_POST['
                         <input class="form-control" type="email" name="email" placeholder="Email Address" id="email" value="<?=htmlspecialchars($account['email'], ENT_QUOTES)?>" required>
                     </div>
 
+                    <div id="passwordStrength" class="passwordStrength" style="display: none;"></div>
+
+                </div>
+            <div class="col-lg-4">
                     <div class="input-group mb-3">
                         <span class="input-group-text">Occupation</span>
                         <input class="form-control" type="text" name="occupation" placeholder="Occupation" id="occupation" value="<?=htmlspecialchars($account['occupation'], ENT_QUOTES)?>">
@@ -313,12 +320,7 @@ if (isset($_POST['username'], $_POST['npassword'], $_POST['cpassword'], $_POST['
                         <a href="profile.php" class="btn btn-outline-secondary">View Profile</a>
                     </div>
 
-                    <div id="passwordStrength" class="passwordStrength"></div>
-
                 </form>
-            </div>
-            <div class="col-lg-4">
-                <img width="100%" class="border rounded p-2 shadow-sm" src="<?= !empty($account['avatar']) ? htmlspecialchars($account['avatar'], ENT_QUOTES) : '/images/avatar/default_avatar.png' ?>">
             </div>
         </div>
     </div>

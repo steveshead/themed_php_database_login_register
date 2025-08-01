@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// show password complexity indicator
 document.addEventListener('DOMContentLoaded', function() {
     // Look for either password field
     const passwordInput = document.getElementById('password') || document.getElementById('npassword');
@@ -77,3 +78,33 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+function showHideStrength() {
+    const password1 = document.getElementById('password');
+    const password2 = document.getElementById('npassword');
+    const strengthDiv = document.getElementById('passwordStrength');
+
+    // Check if either field has text
+    const hasText = (password1 && password1.value.length > 0) ||
+        (password2 && password2.value.length > 0);
+
+    // Show or hide the div
+    if (hasText) {
+        strengthDiv.style.display = 'block';
+    } else {
+        strengthDiv.style.display = 'none';
+    }
+}
+
+// Connect the function to both password fields
+// Only add event listener if the element exists
+const passwordField = document.getElementById('password');
+const nPasswordField = document.getElementById('npassword');
+
+if (passwordField) {
+    passwordField.addEventListener('input', showHideStrength);
+}
+
+if (nPasswordField) {
+    nPasswordField.addEventListener('input', showHideStrength);
+}
