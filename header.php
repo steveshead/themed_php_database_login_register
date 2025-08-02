@@ -43,6 +43,7 @@ if (isset($_SESSION['first_name'])) {
                     <li class="nav-item me-2"><a class="nav-link text-uppercase <?= $current_file_name === 'index.php' ? 'active' : '' ?>" href="/">Home</a></li>
                     <li class="nav-item me-2"><a class="nav-link text-uppercase <?= $current_file_name === 'about.php' ? 'active' : '' ?>" href="about.php">About Us</a></li>
                     <li class="<?=$nav_item_class?>"><a class="nav-link text-uppercase <?= $current_file_name === 'profile.php' ? 'active' : '' ?>" href="profile.php">Profile</a></li>
+                    <li class="<?=$nav_item_class?>"><a class="nav-link text-uppercase <?= $current_file_name === 'page.php' ? 'active' : '' ?>" href="page.php">Page</a></li>
                     <li class="nav-item me-2"><a class="nav-link text-uppercase <?= $current_file_name === 'contact.php' ? 'active' : '' ?>" href="contact.php">Contact</a></li>
                     <li class="<?=$nav_item_class?> "><?=$admin_panel_link?></li>
                     <li class="<?=$nav_item_class?> nav-item me-2"><a class="btn btn-primary btn-sm mt-1 text-uppercase" href="logout.php">Logout</a></li>

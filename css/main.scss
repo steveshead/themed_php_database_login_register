@@ -59,7 +59,6 @@ footer {
     text-decoration: none;
   }
 }
-
 .passwordStrength {
   height: 40px;
   margin: 10px 0;
@@ -71,4 +70,9 @@ footer {
   border-radius: 4px;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+.blog {
+  p {
+    font-size: 17px !important;
+  }
 }
