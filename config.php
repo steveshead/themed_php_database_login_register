@@ -23,7 +23,6 @@ define('db_host', $_ENV['DB_HOST'] ?? 'localhost');
 define('db_user', $_ENV['DB_USER'] ?? 'root');
 define('db_pass', $_ENV['DB_PASS'] ?? '');
 define('db_name', $_ENV['DB_NAME'] ?? 'database');
-
 // Your MySQL database charset.
 define('db_charset','utf8mb4');
 // The secret key used for hashing purposes. Change this to a random unique string.

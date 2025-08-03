@@ -19,6 +19,63 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
+
+// Search function
+    const searchInput = document.getElementById('searchInput');
+    const searchButton = document.getElementById('button-search');
+    const resultsDiv = document.getElementById('searchResults');
+
+    function performSearch() {
+        const searchTerm = searchInput.value.trim();
+
+        if (searchTerm.length === 0) {
+            resultsDiv.innerHTML = '';
+            return;
+        }
+
+        resultsDiv.innerHTML = '<div class="alert alert-info">Searching...</div>';
+
+        fetch('search.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'search=' + encodeURIComponent(searchTerm)
+        })
+            .then(response => response.json())
+            .then(data => {
+                let html = '<div class="card mt-4"><div class="card-header">Search Results (' + data.length + ')</div><div class="card-body">';
+
+                if (data.length > 0) {
+                    data.forEach(result => {
+                        html += '<div class="border-bottom pb-2 mb-2">';
+                        html += '<strong>' + result.username + '</strong><br>';
+                        html += '<small class="text-muted">' + result.email + '</small>';
+                        html += '</div>';
+                    });
+                } else {
+                    html += '<p class="text-muted">No results found for "' + searchTerm + '"</p>';
+                }
+
+                html += '</div></div>';
+                resultsDiv.innerHTML = html;
+            })
+            .catch(error => {
+                resultsDiv.innerHTML = '<div class="alert alert-danger">Error performing search</div>';
+            });
+    }
+
+    if (searchButton) {
+        searchButton.addEventListener('click', performSearch);
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+    }
 });
 
 // show password complexity indicator
@@ -110,27 +167,31 @@ if (nPasswordField) {
     nPasswordField.addEventListener('input', showHideStrength);
 }
 
-// Allow password visibiity toggle in forms
-document.getElementById('togglePassword').addEventListener('click', function() {
-    const passwordField = document.getElementById('password');
-    const nPasswordField = document.getElementById('npassword');
-    const cPasswordField = document.getElementById('cpassword');
-    const toggleIcon = this;
+// Allow password visibility toggle in forms
+const togglePasswordButton = document.getElementById('togglePassword');
 
-    // Find the first field that actually exists to check the current state
-    const currentField = passwordField || nPasswordField || cPasswordField;
+if (togglePasswordButton) {
+    togglePasswordButton.addEventListener('click', function() {
+        const passwordField = document.getElementById('password');
+        const nPasswordField = document.getElementById('npassword');
+        const cPasswordField = document.getElementById('cpassword');
+        const toggleIcon = this;
 
-    if (currentField && currentField.type === 'password') {
-        // Show all password fields
-        if (passwordField) passwordField.type = 'text';
-        if (nPasswordField) nPasswordField.type = 'text';
-        if (cPasswordField) cPasswordField.type = 'text';
-        toggleIcon.className = 'fa-regular fa-eye-slash';
-    } else {
-        // Hide all password fields
-        if (passwordField) passwordField.type = 'password';
-        if (nPasswordField) nPasswordField.type = 'password';
-        if (cPasswordField) cPasswordField.type = 'password';
-        toggleIcon.className = 'fa-regular fa-eye';
-    }
-});
+        // Find the first field that actually exists to check the current state
+        const currentField = passwordField || nPasswordField || cPasswordField;
+
+        if (currentField && currentField.type === 'password') {
+            // Show all password fields
+            if (passwordField) passwordField.type = 'text';
+            if (nPasswordField) nPasswordField.type = 'text';
+            if (cPasswordField) cPasswordField.type = 'text';
+            toggleIcon.className = 'fa-regular fa-eye-slash';
+        } else {
+            // Hide all password fields
+            if (passwordField) passwordField.type = 'password';
+            if (nPasswordField) nPasswordField.type = 'password';
+            if (cPasswordField) cPasswordField.type = 'password';
+            toggleIcon.className = 'fa-regular fa-eye';
+        }
+    });
+}

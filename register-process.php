@@ -87,4 +87,6 @@ if (!empty($passwordErrors)) {
     }
 }
 
+// add CSRF token
+$_SESSION['token'] = hash('sha256', uniqid(rand(), true));
 ?>

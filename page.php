@@ -97,11 +97,17 @@ check_loggedin($pdo);
                     <div class="card-header">Search</div>
                     <div class="card-body">
                         <div class="input-group">
-                            <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
+                            <input class="form-control" type="text" id="searchInput" placeholder="Enter search term..." />
                             <button class="btn btn-primary" id="button-search" type="button">Go!</button>
                         </div>
                     </div>
                 </div>
+
+                <div id="searchResults"></div>
+
+                <script>
+
+                </script>
                 <!-- Categories widget-->
                 <div class="card shadow-sm mb-4">
                     <div class="card-header">Categories</div>
@@ -126,8 +132,22 @@ check_loggedin($pdo);
                 </div>
                 <!-- Side widget-->
                 <div class="card shadow-sm mb-4">
-                    <div class="card-header">Side Widget</div>
+                    <div class="card-header">Side Widget One</div>
                     <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
+                </div>
+                <!-- Side widget-->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header">Side Widget Two</div>
+                    <div class="card-body">
+                        <img class="img-fluid border shadow p-1 me-1  float-end" src="https://picsum.photos/82?random=9" alt="">
+                        <img class="img-fluid border shadow p-1 me-1 float-end" src="https://picsum.photos/82?random=10" alt="">
+                        <img class="img-fluid border shadow p-1 me-1 float-end" src="https://picsum.photos/82?random=11" alt="">
+                        <img class="img-fluid border shadow p-1 mb-1 float-end" src="https://picsum.photos/82?random=12" alt="">
+                        <img class="img-fluid border shadow p-1 me-1 mt-1 float-end" src="https://picsum.photos/82?random=13" alt="">
+                        <img class="img-fluid border shadow p-1 me-1 mt-1 float-end" src="https://picsum.photos/82?random=14" alt="">
+                        <img class="img-fluid border shadow p-1 me-1 mt-1 float-end" src="https://picsum.photos/82?random=15" alt="">
+                        <img class="img-fluid border shadow p-1 mb-1 mt-1 float-end" src="https://picsum.photos/82?random=16" alt="">
+                    </div>
                 </div>
             </div>
         </div>

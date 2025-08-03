@@ -2,10 +2,10 @@
 
 ## Security Improvements
 1. ~~**Update Secret Key**: Replace the placeholder "yoursecretkey" in config.php with a strong, randomly generated key.~~
-2. **Implement Environment Variables**: Move sensitive configuration (database credentials, API keys) to environment variables instead of hardcoding them.
-3. **Add CSRF Protection to All Forms**: Ensure all forms have CSRF token validation, especially register-process.php which is missing it.
+2. ~~**Implement Environment Variables**: Move sensitive configuration (database credentials, API keys) to environment variables instead of hardcoding them.~~
+3. ~~**Add CSRF Protection to All Forms**: Ensure all forms have CSRF token validation.~~
 4. **Enhance Password Security**:
-   - Consider increasing minimum password length to 12 characters
+   ~~- Consider increasing minimum password length to 12 characters (Nope - min of 8 is enough with password complexity)~~
    - Add password breach checking (via API like Have I Been Pwned)
 5. **Improve Two-Factor Authentication**:
    - Make 2FA optional for users rather than only IP-based
@@ -38,7 +38,7 @@
 
 ## User Experience Improvements
 1. **Enhance Form Validation**:
-   - Add client-side validation for all forms
+   ~~- Add client-side validation for all forms~~
    ~~- Add password strength indicator on registration and profile pages~~
    ~~- Add real-time validation feedback~~
 2. **Improve Mobile Navigation**: Fix the mobile menu toggle functionality.
