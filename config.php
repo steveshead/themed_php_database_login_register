@@ -1,12 +1,29 @@
 <?php
 // Your MySQL database hostname.
-define('db_host','localhost');
-// Your MySQL database username.
-define('db_user','root');
-// Your MySQL database password.
-define('db_pass','root');
-// Your MySQL database name.
-define('db_name','loginregistration-themed');
+// Load environment variables from .env file
+function loadEnv($filePath) {
+    if (!file_exists($filePath)) {
+        return;
+    }
+
+    $lines = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        if (strpos($line, '=') !== false && $line[0] !== '#') {
+            list($key, $value) = explode('=', $line, 2);
+            $_ENV[trim($key)] = trim($value);
+        }
+    }
+}
+
+// Load the .env file
+loadEnv(__DIR__ . '/.env');
+
+// Define constants using environment variables
+define('db_host', $_ENV['DB_HOST'] ?? 'localhost');
+define('db_user', $_ENV['DB_USER'] ?? 'root');
+define('db_pass', $_ENV['DB_PASS'] ?? '');
+define('db_name', $_ENV['DB_NAME'] ?? 'database');
+
 // Your MySQL database charset.
 define('db_charset','utf8mb4');
 // The secret key used for hashing purposes. Change this to a random unique string.

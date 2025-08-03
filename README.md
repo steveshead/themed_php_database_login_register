@@ -5,6 +5,8 @@ This system provides a simple themed user login and registration functionality u
 This script utilizes Brute Force and CSRF protections, as well as being able to use 2FA, and has configurable google and facebook
 OAuth logins.
 
+For your database connection to work, rename .env.example to .env, and add you database connection credentials there.
+
 ### Current Date
 `2025-08-02`
 
