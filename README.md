@@ -90,3 +90,7 @@ Replace **YOUR_SECRET_KEY** with your facebook oauth app secret\
 Replace http://loginregistration-themed.local:8890/google-oauth.php with your website URL/facebook-oauth.php\
 
 Note that facebook login has not been tested on a public domain. Use at your own risk.
+
+## Seach Functionality
+Note that the search functionality on page.php currently just searches for username and email address in the database.
+I wanted search functionality to work, but haven't centered on what it should search, yet. 

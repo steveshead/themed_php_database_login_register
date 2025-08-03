@@ -1,12 +1,29 @@
 <?php
-// Don't include any files that might output HTML
 session_start();
 
-// Just include the bare minimum for database connection
-$db_host = 'localhost';  // or use your env variables
-$db_user = 'root';
-$db_pass = 'root';
-$db_name = 'loginregistration-themed';
+// Load environment variables from .env file
+function loadEnv($filePath) {
+    if (!file_exists($filePath)) {
+        return;
+    }
+
+    $lines = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        if (strpos($line, '=') !== false && $line[0] !== '#') {
+            list($key, $value) = explode('=', $line, 2);
+            $_ENV[trim($key)] = trim($value);
+        }
+    }
+}
+
+// Load the .env file
+loadEnv(__DIR__ . '/.env');
+
+// Get database credentials from environment variables
+$db_host = $_ENV['DB_HOST'] ?? 'localhost';
+$db_user = $_ENV['DB_USER'] ?? 'root';
+$db_pass = $_ENV['DB_PASS'] ?? '';
+$db_name = $_ENV['DB_NAME'] ?? 'database';
 
 try {
     $pdo = new PDO("mysql:host=$db_host;dbname=$db_name;charset=utf8mb4", $db_user, $db_pass);
@@ -16,7 +33,7 @@ try {
     exit;
 }
 
-// Simple login check without including main.php
+// Simple login check
 if (!isset($_SESSION['account_loggedin'])) {
     echo json_encode(['error' => 'Not logged in']);
     exit;
@@ -24,6 +41,7 @@ if (!isset($_SESSION['account_loggedin'])) {
 
 header('Content-Type: application/json');
 
+// Rest of your search code...
 if (isset($_POST['search']) && !empty(trim($_POST['search']))) {
     $searchTerm = '%' . trim($_POST['search']) . '%';
 
