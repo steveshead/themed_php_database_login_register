@@ -6,7 +6,7 @@ This script utilizes Brute Force and CSRF protections, as well as being able to 
 OAuth logins.
 
 ### Current Date
-`2025-07-19`
+`2025-08-02`
 
 ## Admin Files
 - `admin.js`
@@ -44,6 +44,7 @@ OAuth logins.
 - `login.php`
 - `logout.php`
 - `main.php`
+- `page.php`
 - `profile.php`
 - `register.php`
 - `register-process.php`

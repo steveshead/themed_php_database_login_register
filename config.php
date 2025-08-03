@@ -10,7 +10,7 @@ define('db_name','loginregistration-themed');
 // Your MySQL database charset.
 define('db_charset','utf8mb4');
 // The secret key used for hashing purposes. Change this to a random unique string.
-define('secret_key','yoursecretkey');
+define('secret_key','6Ecqf3xF6hIIt3QaRMSp7CLos7gVe87N');
 // The base URL of the PHP login system (e.g. https://example.com/phplogin/). Must include a trailing slash.
 define('base_url','https://loginregistration-themed.local:8890/');
 // The template editor to use for editing product descriptions, email templates, etc.
@@ -61,7 +61,7 @@ define('facebook_oauth_redirect_uri','http://localhost/phplogin/facebook-oauth.p
 
 /* Session Settings */
 // Session timeout in seconds (e.g., 1800 = 30 minutes, 3600 = 60 minutes)
-define('session_timeout', 3600);
+define('session_timeout',3600);
 
 // Uncomment the below to output all errors
 // ini_set('log_errors', true);

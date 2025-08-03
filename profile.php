@@ -258,6 +258,7 @@ if (isset($_POST['username'], $_POST['npassword'], $_POST['cpassword'], $_POST['
                     <div class="input-group mb-3">
                         <span class="input-group-text">New Password</span>
                         <input class="form-control" type="password" name="npassword" id="npassword" autocomplete="new-password">
+                        <i id="togglePassword" class="fa-regular fa-eye" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: black;"></i>
                     </div>
 
                     <div class="input-group mb-3">

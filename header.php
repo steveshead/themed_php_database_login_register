@@ -24,8 +24,8 @@ if (isset($_SESSION['first_name'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
-    <!-- Default favicon (for browsers that don't support media queries in link tags) -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/favicon/favicon_light_theme.svg" id="faviconTag">
+    <!-- Font Awesome CN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />    <link rel="shortcut icon" type="image/x-icon" href="assets/favicon/favicon_light_theme.svg" id="faviconTag">
 </head>
 
 <header class="shadow bg-white sticky-top">

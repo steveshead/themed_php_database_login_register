@@ -79,6 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// Show the password strength meter when a password is entered
 function showHideStrength() {
     const password1 = document.getElementById('password');
     const password2 = document.getElementById('npassword');
@@ -108,3 +109,28 @@ if (passwordField) {
 if (nPasswordField) {
     nPasswordField.addEventListener('input', showHideStrength);
 }
+
+// Allow password visibiity toggle in forms
+document.getElementById('togglePassword').addEventListener('click', function() {
+    const passwordField = document.getElementById('password');
+    const nPasswordField = document.getElementById('npassword');
+    const cPasswordField = document.getElementById('cpassword');
+    const toggleIcon = this;
+
+    // Find the first field that actually exists to check the current state
+    const currentField = passwordField || nPasswordField || cPasswordField;
+
+    if (currentField && currentField.type === 'password') {
+        // Show all password fields
+        if (passwordField) passwordField.type = 'text';
+        if (nPasswordField) nPasswordField.type = 'text';
+        if (cPasswordField) cPasswordField.type = 'text';
+        toggleIcon.className = 'fa-regular fa-eye-slash';
+    } else {
+        // Hide all password fields
+        if (passwordField) passwordField.type = 'password';
+        if (nPasswordField) nPasswordField.type = 'password';
+        if (cPasswordField) cPasswordField.type = 'password';
+        toggleIcon.className = 'fa-regular fa-eye';
+    }
+});
