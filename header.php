@@ -6,6 +6,10 @@ $current_file_name = basename($_SERVER['PHP_SELF']);
 $logged_in = isset($_SESSION['account_loggedin']) && $_SESSION['account_loggedin'] === TRUE;
 // CSS class for nav items that should be hidden when not logged in
 $nav_item_class = !$logged_in ? 'nav-item me-2 display-none' : 'nav-item me-2';
+// Set default page title if not already defined
+if (!isset($page_title)) {
+    $page_title = 'Welcome';
+}
 // Indenting the below code may cause HTML validation errors
 
 $welcome = '';
@@ -51,6 +55,58 @@ if (isset($_SESSION['first_name'])) {
                 <div class="ms-auto <?= $logged_in ? 'display-none' : '' ?>">
                     <a class="btn btn-primary me-2" href="login.php">Log In</a>
                     <a class="btn btn-outline-primary" href="register.php">Sign Up</a>
+                </div>
+            </div>
+
+            <!-- Mobile Side Menu -->
+            <div id="sideMenuHeaders07" class="d-none position-fixed top-0 end-0 bottom-0 bg-white shadow p-4 mobile-menu" style="width: 300px; z-index: 1050; overflow-y: auto; transition: transform 0.3s ease-in-out;">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <a class="navbar-brand" href="/">
+                        <img src="assets/logos/novus/novus.png" alt="" width="106">
+                    </a>
+                    <button type="button" class="btn-close" data-toggle="side-menu" data-target="#sideMenuHeaders07" aria-label="Close"></button>
+                </div>
+                <ul class="nav flex-column">
+                    <li class="nav-item"><a class="nav-link py-2 text-uppercase <?= $current_file_name === 'index.php' ? 'active' : '' ?>" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link py-2 text-uppercase <?= $current_file_name === 'about.php' ? 'active' : '' ?>" href="about.php">About Us</a></li>
+                    <?php if ($logged_in): ?>
+                    <li class="nav-item"><a class="nav-link py-2 text-uppercase <?= $current_file_name === 'profile.php' ? 'active' : '' ?>" href="profile.php">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link py-2 text-uppercase <?= $current_file_name === 'page.php' ? 'active' : '' ?>" href="page.php">Page</a></li>
+                    <?php endif; ?>
+                    <li class="nav-item"><a class="nav-link py-2 text-uppercase <?= $current_file_name === 'contact.php' ? 'active' : '' ?>" href="contact.php">Contact</a></li>
+                    <?php if ($logged_in && isset($_SESSION['account_role']) && $_SESSION['account_role'] === 'Admin'): ?>
+                    <li class="nav-item"><a class="nav-link py-2 text-uppercase" href="admin/index.php" target="_blank">Admin</a></li>
+                    <?php endif; ?>
+                </ul>
+                <?php if ($logged_in): ?>
+                <div class="mt-4">
+                    <a class="btn btn-primary w-100 text-uppercase" href="logout.php">Logout</a>
+                </div>
+                <?php else: ?>
+                <div class="mt-4">
+                    <a class="btn btn-primary w-100 mb-2" href="login.php">Log In</a>
+                    <a class="btn btn-outline-primary w-100" href="register.php">Sign Up</a>
+                </div>
+                <?php endif; ?>
+
+                <div class="mt-4 pt-4 border-top">
+                    <ul class="list-unstyled d-flex justify-content-center">
+                        <li class="mx-2">
+                            <a class="link-body-emphasis" href="https://www.facebook.com/<?= isset($_SESSION['facebook']) ? htmlspecialchars($_SESSION['facebook'], ENT_QUOTES) : '' ?>" aria-label="Facebook">
+                                <img src="assets/icons/facebook-blue.svg" alt="">
+                            </a>
+                        </li>
+                        <li class="mx-2">
+                            <a class="link-body-emphasis" href="https://www.instagram.com/<?= isset($_SESSION['instagram']) ? htmlspecialchars($_SESSION['instagram'], ENT_QUOTES) : '' ?>" aria-label="Instagram">
+                                <img src="assets/icons/instagram-blue.svg" alt="">
+                            </a>
+                        </li>
+                        <li class="mx-2">
+                            <a class="link-body-emphasis" href="https://www.x.com/<?= isset($_SESSION['twitter']) ? htmlspecialchars($_SESSION['twitter'], ENT_QUOTES) : '' ?>" aria-label="Twitter">
+                                <img src="assets/icons/twitter-blue.svg" alt="">
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <ul class="list-unstyled d-flex align-items-center justify-content-center mb-0">

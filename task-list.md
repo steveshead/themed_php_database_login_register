@@ -4,9 +4,9 @@
 1. ~~**Update Secret Key**: Replace the placeholder "yoursecretkey" in config.php with a strong, randomly generated key.~~
 2. ~~**Implement Environment Variables**: Move sensitive configuration (database credentials, API keys) to environment variables instead of hardcoding them.~~
 3. ~~**Add CSRF Protection to All Forms**: Ensure all forms have CSRF token validation.~~
-4. **Enhance Password Security**:
+4. ~~**Enhance Password Security**:~~
    ~~- Consider increasing minimum password length to 12 characters (Nope - min of 8 is enough with password complexity)~~
-   - Add password breach checking (via API like Have I Been Pwned)
+   ~~- Add password breach checking (via API like Have I Been Pwned) (NOPE - this app isn't yet big enouogh for that functionality)~~
 5. **Improve Two-Factor Authentication**:
    - Make 2FA optional for users rather than only IP-based
    - Consider adding app-based 2FA (like Google Authenticator)
@@ -41,7 +41,7 @@
    ~~- Add client-side validation for all forms~~
    ~~- Add password strength indicator on registration and profile pages~~
    ~~- Add real-time validation feedback~~
-2. **Improve Mobile Navigation**: Fix the mobile menu toggle functionality.
+2. ~~**Improve Mobile Navigation**: Fix the mobile menu toggle functionality.~~
 3. ~~**Add Password Visibility Toggle**: Allow users to toggle password visibility.~~
 4. **Enhance Error Messages**: Make error messages more user-friendly and descriptive.
 5. **Implement Progressive Form Completion**: Break long forms into steps.

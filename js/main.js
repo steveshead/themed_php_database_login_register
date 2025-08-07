@@ -11,14 +11,61 @@ document.addEventListener('DOMContentLoaded', function() {
                 toggler[i].addEventListener('click', function(event) {
                     event.preventDefault();
                     const menu = document.querySelector(target);
-        
+
                     if (menu) {
-                        menu.classList.toggle('d-none');
+                        // If menu is hidden (has d-none class)
+                        if (menu.classList.contains('d-none')) {
+                            // First remove d-none to make it visible
+                            menu.classList.remove('d-none');
+                            // Set initial position (off-screen)
+                            menu.style.transform = 'translateX(100%)';
+                            // Force a reflow to ensure the initial transform is applied
+                            void menu.offsetWidth;
+                            // Then animate it in
+                            menu.style.transform = 'translateX(0)';
+                            document.body.style.overflow = 'hidden';
+                        } else {
+                            // Animate it out
+                            menu.style.transform = 'translateX(100%)';
+                            document.body.style.overflow = '';
+                            // After animation completes, add d-none class
+                            setTimeout(() => {
+                                menu.classList.add('d-none');
+                                // Reset transform for next opening
+                                menu.style.transform = '';
+                            }, 300); // Match this to the CSS transition duration
+                        }
                     }
                 });
             }
         }
     }
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+        const sideMenu = document.getElementById('sideMenuHeaders07');
+        const togglers = document.querySelectorAll('[data-toggle="side-menu"]');
+
+        // Check if click is outside the menu and togglers
+        let clickedOnToggler = false;
+        togglers.forEach(toggler => {
+            if (toggler.contains(event.target)) {
+                clickedOnToggler = true;
+            }
+        });
+
+        if (sideMenu && !sideMenu.classList.contains('d-none') && !sideMenu.contains(event.target) && !clickedOnToggler) {
+            // Animate it out
+            sideMenu.style.transform = 'translateX(100%)';
+            document.body.style.overflow = '';
+            // After animation completes, add d-none class
+            setTimeout(() => {
+                sideMenu.classList.add('d-none');
+                // Reset transform for next opening
+                sideMenu.style.transform = '';
+            }, 300); // Match this to the CSS transition duration
+        }
+    });
 
 // Search function
     const searchInput = document.getElementById('searchInput');

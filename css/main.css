@@ -68,4 +68,39 @@ footer h5 {
   font-size: 17px !important;
 }
 
+/* Mobile Menu Styles */
+.mobile-menu {
+  transform: translateX(100%);
+}
+
+.mobile-menu .nav-link {
+  font-size: 18px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.mobile-menu .nav-link.active {
+  color: #0d6efd;
+  font-weight: 500;
+}
+
+.mobile-menu .btn-close {
+  opacity: 0.8;
+}
+
+.mobile-menu .btn-close:hover {
+  opacity: 1;
+}
+
+@media (max-width: 991.98px) {
+  .navbar-brand {
+    margin-right: 0;
+  }
+
+  .navbar .position-absolute {
+    position: static !important;
+    transform: none !important;
+  }
+}
+
 /*# sourceMappingURL=main.css.map */

@@ -105,9 +105,6 @@ check_loggedin($pdo);
 
                 <div id="searchResults"></div>
 
-                <script>
-
-                </script>
                 <!-- Categories widget-->
                 <div class="card shadow-sm mb-4">
                     <div class="card-header">Categories</div>
