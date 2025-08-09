@@ -37,7 +37,7 @@
 9. **Create API Documentation**: Document any APIs for future developers.
 
 ## User Experience Improvements
-1. **Enhance Form Validation**:
+1. ~~**Enhance Form Validation**:~~
    ~~- Add client-side validation for all forms~~
    ~~- Add password strength indicator on registration and profile pages~~
    ~~- Add real-time validation feedback~~

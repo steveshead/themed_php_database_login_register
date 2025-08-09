@@ -12,6 +12,8 @@ $active_accounts = $pdo->query('SELECT * FROM accounts WHERE last_seen > date_su
 $inactive_accounts_list = $pdo->query('SELECT * FROM accounts WHERE last_seen < DATE_SUB(NOW(), INTERVAL 30 DAY) ORDER BY last_seen DESC')->fetchAll(PDO::FETCH_ASSOC);
 // Total accounts that are active in the last month
 $active_accounts_total = $pdo->query('SELECT COUNT(*) AS total FROM accounts WHERE last_seen > date_sub("' . $date . '", interval 1 month)')->fetchColumn();
+// Accoutns awaiting activation
+$unactiveated_accounts = $pdo->query('SELECT * FROM accounts WHERE activation_code != "activated" ORDER BY registered DESC')->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <?=template_admin_header('Dashboard', 'dashboard')?>
 
@@ -334,108 +336,227 @@ $active_accounts_total = $pdo->query('SELECT COUNT(*) AS total FROM accounts WHE
     </div>
 
     <div class="content-block no-pad">
-    <div class="table">
-        <table>
-            <thead>
-            <tr>
-                <td>#</td>
-                <td colspan="2">Username</td>
-                <td class="responsive-hidden">Email</td>
-                <td class="responsive-hidden">Status</td>
-                <td class="responsive-hidden">Role</td>
-                <td class="responsive-hidden">Last Seen</td>
-                <td class="responsive-hidden">Registered Date</td>
-                <td>Actions</td>
-            </tr>
-            </thead>
-            <tbody>
-            <?php if (!$inactive_accounts_list): ?>
+        <div class="table">
+            <table>
+                <thead>
                 <tr>
-                    <td colspan="20" class="no-results">There are no inactive accounts.</td>
+                    <td>#</td>
+                    <td colspan="2">Username</td>
+                    <td class="responsive-hidden">Email</td>
+                    <td class="responsive-hidden">Status</td>
+                    <td class="responsive-hidden">Role</td>
+                    <td class="responsive-hidden">Last Seen</td>
+                    <td class="responsive-hidden">Registered Date</td>
+                    <td>Actions</td>
                 </tr>
-            <?php endif; ?>
-            <?php foreach ($inactive_accounts_list as $account): ?>
-                <tr>
-                    <td class="alt"><?=$account['id']?></td>
-                    <td class="img">
-                        <div class="profile-img">
-                            <span style="background-color:<?=color_from_string($account['username'])?>"><?=strtoupper(substr($account['username'], 0, 1))?></span>
-                            <?php if ($account['last_seen'] > date('Y-m-d H:i:s', strtotime('-15 minutes'))): ?>
-                                <i class="online" title="Online"></i>
-                            <?php endif; ?>
-                        </div>
-                    </td>
-                    <td><?=htmlspecialchars($account['username'], ENT_QUOTES)?></td>
-                    <td class="responsive-hidden"><?=htmlspecialchars($account['email'], ENT_QUOTES)?></td>
-                    <td class="responsive-hidden">
-                        <?php if (!$account['approved']): ?>
-                            <span class="orange small">Pending Approval</span>
-                        <?php elseif ($account['activation_code'] == 'activated'): ?>
-                            <span class="green small">Activated</span>
-                        <?php elseif ($account['activation_code'] == 'deactivated'): ?>
-                            <span class="red small">Deactivated</span>
-                        <?php else: ?>
-                            <span class="grey small" title="<?=$account['activation_code']?>">Pending Activation</span>
-                        <?php endif; ?>
-                    </td>
-                    <td class="responsive-hidden">
-                        <?php if ($account['role'] == 'Admin'): ?>
-                            <span class="red small"><?=$account['role']?></span>
-                        <?php elseif ($account['role'] == 'Member'): ?>
-                            <span class="blue small"><?=$account['role']?></span>
-                        <?php else: ?>
-                            <span class="grey small"><?=$account['role']?></span>
-                        <?php endif; ?>
-                    </td>
-                    <td class="responsive-hidden alt" title="<?=$account['last_seen']?>"><?=time_elapsed_string($account['last_seen'])?></td>
-                    <td class="responsive-hidden alt"><?=date('Y-m-d H:ia', strtotime($account['registered']))?></td>
-                    <td class="actions">
-                        <div class="table-dropdown">
-                            <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"/></svg>
-                            <div class="table-dropdown-items">
-                                <a href="account.php?id=<?=$account['id']?>">
-                                        <span class="icon">
-                                            <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z"/></svg>
-                                        </span>
-                                    Edit
-                                </a>
-                                <?php if (!$account['approved']): ?>
-                                    <a class="green" href="accounts.php?approve=<?=$account['id']?>" onclick="return confirm('Are you sure you want to approve this account?')">
-                                        <span class="icon">
-                                            <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM625 177L497 305c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L591 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>
-                                        </span>
-                                        Approve
-                                    </a>
+                </thead>
+                <tbody>
+                <?php if (!$inactive_accounts_list): ?>
+                    <tr>
+                        <td colspan="20" class="no-results">There are no inactive accounts.</td>
+                    </tr>
+                <?php endif; ?>
+                <?php foreach ($inactive_accounts_list as $account): ?>
+                    <tr>
+                        <td class="alt"><?=$account['id']?></td>
+                        <td class="img">
+                            <div class="profile-img">
+                                <span style="background-color:<?=color_from_string($account['username'])?>"><?=strtoupper(substr($account['username'], 0, 1))?></span>
+                                <?php if ($account['last_seen'] > date('Y-m-d H:i:s', strtotime('-15 minutes'))): ?>
+                                    <i class="online" title="Online"></i>
                                 <?php endif; ?>
-                                <?php if ($account['activation_code'] != 'activated'): ?>
-                                    <a class="green" href="accounts.php?activate=<?=$account['id']?>" onclick="return confirm('Are you sure you want to activate this account?')">
-                                        <span class="icon">
-                                            <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM625 177L497 305c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L591 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>
-                                        </span>
-                                        Activate
-                                    </a>
-                                <?php endif; ?>
-                                <?php if ($account['activation_code'] != 'deactivated'): ?>
-                                    <a class="red" href="accounts.php?deactivate=<?=$account['id']?>" onclick="return confirm('Are you sure you want to deactivate this account? They will no longer be able to log in.')">
-                                        <span class="icon">
-                                            <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L353.3 251.6C407.9 237 448 187.2 448 128C448 57.3 390.7 0 320 0C250.2 0 193.5 55.8 192 125.2L38.8 5.1zM264.3 304.3C170.5 309.4 96 387.2 96 482.3c0 16.4 13.3 29.7 29.7 29.7H514.3c3.9 0 7.6-.7 11-2.1l-261-205.6z"/></svg>
-                                        </span>
-                                        Deactivate
-                                    </a>
-                                <?php endif; ?>
-                                <a class="red" href="accounts.php?delete=<?=$account['id']?>" onclick="return confirm('Are you sure you want to delete this account?')">
-                                        <span class="icon">
-                                            <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
-                                        </span>
-                                    Delete
-                                </a>
                             </div>
-                        </div>
-                    </td>
+                        </td>
+                        <td><?=htmlspecialchars($account['username'], ENT_QUOTES)?></td>
+                        <td class="responsive-hidden"><?=htmlspecialchars($account['email'], ENT_QUOTES)?></td>
+                        <td class="responsive-hidden">
+                            <?php if (!$account['approved']): ?>
+                                <span class="orange small">Pending Approval</span>
+                            <?php elseif ($account['activation_code'] == 'activated'): ?>
+                                <span class="green small">Activated</span>
+                            <?php elseif ($account['activation_code'] == 'deactivated'): ?>
+                                <span class="red small">Deactivated</span>
+                            <?php else: ?>
+                                <span class="grey small" title="<?=$account['activation_code']?>">Pending Activation</span>
+                            <?php endif; ?>
+                        </td>
+                        <td class="responsive-hidden">
+                            <?php if ($account['role'] == 'Admin'): ?>
+                                <span class="red small"><?=$account['role']?></span>
+                            <?php elseif ($account['role'] == 'Member'): ?>
+                                <span class="blue small"><?=$account['role']?></span>
+                            <?php else: ?>
+                                <span class="grey small"><?=$account['role']?></span>
+                            <?php endif; ?>
+                        </td>
+                        <td class="responsive-hidden alt" title="<?=$account['last_seen']?>"><?=time_elapsed_string($account['last_seen'])?></td>
+                        <td class="responsive-hidden alt"><?=date('Y-m-d H:ia', strtotime($account['registered']))?></td>
+                        <td class="actions">
+                            <div class="table-dropdown">
+                                <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"/></svg>
+                                <div class="table-dropdown-items">
+                                    <a href="account.php?id=<?=$account['id']?>">
+                                            <span class="icon">
+                                                <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z"/></svg>
+                                            </span>
+                                        Edit
+                                    </a>
+                                    <?php if (!$account['approved']): ?>
+                                        <a class="green" href="accounts.php?approve=<?=$account['id']?>" onclick="return confirm('Are you sure you want to approve this account?')">
+                                            <span class="icon">
+                                                <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM625 177L497 305c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L591 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>
+                                            </span>
+                                            Approve
+                                        </a>
+                                    <?php endif; ?>
+                                    <?php if ($account['activation_code'] != 'activated'): ?>
+                                        <a class="green" href="accounts.php?activate=<?=$account['id']?>" onclick="return confirm('Are you sure you want to activate this account?')">
+                                            <span class="icon">
+                                                <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM625 177L497 305c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L591 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>
+                                            </span>
+                                            Activate
+                                        </a>
+                                    <?php endif; ?>
+                                    <?php if ($account['activation_code'] != 'deactivated'): ?>
+                                        <a class="red" href="accounts.php?deactivate=<?=$account['id']?>" onclick="return confirm('Are you sure you want to deactivate this account? They will no longer be able to log in.')">
+                                            <span class="icon">
+                                                <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L353.3 251.6C407.9 237 448 187.2 448 128C448 57.3 390.7 0 320 0C250.2 0 193.5 55.8 192 125.2L38.8 5.1zM264.3 304.3C170.5 309.4 96 387.2 96 482.3c0 16.4 13.3 29.7 29.7 29.7H514.3c3.9 0 7.6-.7 11-2.1l-261-205.6z"/></svg>
+                                            </span>
+                                            Deactivate
+                                        </a>
+                                    <?php endif; ?>
+                                    <a class="red" href="accounts.php?delete=<?=$account['id']?>" onclick="return confirm('Are you sure you want to delete this account?')">
+                                            <span class="icon">
+                                                <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
+                                            </span>
+                                        Delete
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="content-title" style="margin-top:40px">
+        <div class="title">
+            <div class="icon alt">
+                <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M224 0a128 128 0 1 1 0 256A128 128 0 1 1 224 0zM178.3 304h91.4c20.6 0 40.4 3.5 58.8 9.9C323 331 320 349.1 320 368c0 59.5 29.5 112.1 74.8 144H29.7C13.3 512 0 498.7 0 482.3C0 383.8 79.8 304 178.3 304zM352 368a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-80c-8.8 0-16 7.2-16 16v64c0 8.8 7.2 16 16 16h48c8.8 0 16-7.2 16-16s-7.2-16-16-16H512V304c0-8.8-7.2-16-16-16z"/></svg>
+            </div>
+            <div class="txt">
+                <h2>Unactivated Accounts</h2>
+                <p>Accounts awaiting activation.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-block no-pad">
+        <div class="table">
+            <table>
+                <thead>
+                <tr>
+                    <td>#</td>
+                    <td colspan="2">Username</td>
+                    <td class="responsive-hidden">Email</td>
+                    <td class="responsive-hidden">Status</td>
+                    <td class="responsive-hidden">Role</td>
+                    <td class="responsive-hidden">Last Seen</td>
+                    <td class="responsive-hidden">Registered Date</td>
+                    <td>Actions</td>
                 </tr>
-            <?php endforeach; ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                <?php if (!$inactive_accounts_list): ?>
+                    <tr>
+                        <td colspan="20" class="no-results">There are no inactive accounts.</td>
+                    </tr>
+                <?php endif; ?>
+                <?php foreach ($unactiveated_accounts as $account): ?>
+                    <tr>
+                        <td class="alt"><?=$account['id']?></td>
+                        <td class="img">
+                            <div class="profile-img">
+                                <span style="background-color:<?=color_from_string($account['username'])?>"><?=strtoupper(substr($account['username'], 0, 1))?></span>
+                                <?php if ($account['last_seen'] > date('Y-m-d H:i:s', strtotime('-15 minutes'))): ?>
+                                    <i class="online" title="Online"></i>
+                                <?php endif; ?>
+                            </div>
+                        </td>
+                        <td><?=htmlspecialchars($account['username'], ENT_QUOTES)?></td>
+                        <td class="responsive-hidden"><?=htmlspecialchars($account['email'], ENT_QUOTES)?></td>
+                        <td class="responsive-hidden">
+                            <?php if (!$account['approved']): ?>
+                                <span class="orange small">Pending Approval</span>
+                            <?php elseif ($account['activation_code'] == 'activated'): ?>
+                                <span class="green small">Activated</span>
+                            <?php elseif ($account['activation_code'] == 'deactivated'): ?>
+                                <span class="red small">Deactivated</span>
+                            <?php else: ?>
+                                <span class="grey small" title="<?=$account['activation_code']?>">Pending Activation</span>
+                            <?php endif; ?>
+                        </td>
+                        <td class="responsive-hidden">
+                            <?php if ($account['role'] == 'Admin'): ?>
+                                <span class="red small"><?=$account['role']?></span>
+                            <?php elseif ($account['role'] == 'Member'): ?>
+                                <span class="blue small"><?=$account['role']?></span>
+                            <?php else: ?>
+                                <span class="grey small"><?=$account['role']?></span>
+                            <?php endif; ?>
+                        </td>
+                        <td class="responsive-hidden alt" title="<?=$account['last_seen']?>"><?=time_elapsed_string($account['last_seen'])?></td>
+                        <td class="responsive-hidden alt"><?=date('Y-m-d H:ia', strtotime($account['registered']))?></td>
+                        <td class="actions">
+                            <div class="table-dropdown">
+                                <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"/></svg>
+                                <div class="table-dropdown-items">
+                                    <a href="account.php?id=<?=$account['id']?>">
+                                            <span class="icon">
+                                                <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z"/></svg>
+                                            </span>
+                                        Edit
+                                    </a>
+                                    <?php if (!$account['approved']): ?>
+                                        <a class="green" href="accounts.php?approve=<?=$account['id']?>" onclick="return confirm('Are you sure you want to approve this account?')">
+                                            <span class="icon">
+                                                <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM625 177L497 305c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L591 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>
+                                            </span>
+                                            Approve
+                                        </a>
+                                    <?php endif; ?>
+                                    <?php if ($account['activation_code'] != 'activated'): ?>
+                                        <a class="green" href="accounts.php?activate=<?=$account['id']?>" onclick="return confirm('Are you sure you want to activate this account?')">
+                                            <span class="icon">
+                                                <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM625 177L497 305c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L591 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>
+                                            </span>
+                                            Activate
+                                        </a>
+                                    <?php endif; ?>
+                                    <?php if ($account['activation_code'] != 'deactivated'): ?>
+                                        <a class="red" href="accounts.php?deactivate=<?=$account['id']?>" onclick="return confirm('Are you sure you want to deactivate this account? They will no longer be able to log in.')">
+                                            <span class="icon">
+                                                <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L353.3 251.6C407.9 237 448 187.2 448 128C448 57.3 390.7 0 320 0C250.2 0 193.5 55.8 192 125.2L38.8 5.1zM264.3 304.3C170.5 309.4 96 387.2 96 482.3c0 16.4 13.3 29.7 29.7 29.7H514.3c3.9 0 7.6-.7 11-2.1l-261-205.6z"/></svg>
+                                            </span>
+                                            Deactivate
+                                        </a>
+                                    <?php endif; ?>
+                                    <a class="red" href="accounts.php?delete=<?=$account['id']?>" onclick="return confirm('Are you sure you want to delete this account?')">
+                                            <span class="icon">
+                                                <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
+                                            </span>
+                                        Delete
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 
 
