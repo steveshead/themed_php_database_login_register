@@ -829,7 +829,7 @@ main {
 		justify-content: space-between;
 		padding-bottom: 30px;
 		.stat {
-			width: 24%;
+			width: 19%;
 			padding: 0;
 			display: flex;
 			flex-flow: wrap;
@@ -890,6 +890,20 @@ main {
 				svg {
 					fill: mix(#000, $background-color, 40%);
 					margin-right: 5px;
+				}
+			}
+			&.amber {
+				border-left: 4px solid #ccb51e;
+				.data {
+					h3 {
+						color: #cdb92f;
+					}
+				}
+				> .icon {
+					background-color: #f7f4d5;
+					svg {
+						fill: #baad53;
+					}
 				}
 			}
 			&.green {

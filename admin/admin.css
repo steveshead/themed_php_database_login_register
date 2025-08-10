@@ -805,7 +805,7 @@ main .dashboard {
   padding-bottom: 30px;
 }
 main .dashboard .stat {
-  width: 24%;
+  width: 19%;
   padding: 0;
   display: flex;
   flex-flow: wrap;
@@ -868,6 +868,18 @@ main .dashboard .stat .footer {
 main .dashboard .stat .footer svg {
   fill: #929294;
   margin-right: 5px;
+}
+main .dashboard .stat.amber {
+  border-left: 4px solid #ccb51e;
+}
+main .dashboard .stat.amber .data h3 {
+  color: #cdb92f;
+}
+main .dashboard .stat.amber > .icon {
+  background-color: #f7f4d5;
+}
+main .dashboard .stat.amber > .icon svg {
+  fill: #baad53;
 }
 main .dashboard .stat.green {
   border-left: 4px solid #1ecc8c;

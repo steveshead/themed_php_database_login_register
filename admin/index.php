@@ -13,6 +13,7 @@ $inactive_accounts_list = $pdo->query('SELECT * FROM accounts WHERE last_seen < 
 // Total accounts that are active in the last month
 $active_accounts_total = $pdo->query('SELECT COUNT(*) AS total FROM accounts WHERE last_seen > date_sub("' . $date . '", interval 1 month)')->fetchColumn();
 // Accoutns awaiting activation
+$unactiveated_accounts_total = $pdo->query('SELECT COUNT(*) AS total FROM accounts WHERE activation_code != "activated"')->fetchColumn();
 $unactiveated_accounts = $pdo->query('SELECT * FROM accounts WHERE activation_code != "activated" ORDER BY registered DESC')->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <?=template_admin_header('Dashboard', 'dashboard')?>
@@ -85,6 +86,20 @@ $unactiveated_accounts = $pdo->query('SELECT * FROM accounts WHERE activation_co
             Total inactive accounts
         </div>
     </div>
+
+    <div class="content-block stat amber">
+        <div class="data">
+            <h3>Unactivated Accounts </h3>
+            <p><?=$unactiveated_accounts_total ? number_format($unactiveated_accounts_total) : 0?></p>
+        </div>
+        <div class="icon">
+            <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L381.9 274c48.5-23.2 82.1-72.7 82.1-130C464 64.5 399.5 0 320 0C250.4 0 192.4 49.3 178.9 114.9L38.8 5.1zM545.5 512H528L284.3 320h-59C136.2 320 64 392.2 64 481.3c0 17 13.8 30.7 30.7 30.7H545.3l.3 0z"/></svg>
+        </div>
+        <div class="footer">
+            <svg width="11" height="11" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M105.1 202.6c7.7-21.8 20.2-42.3 37.8-59.8c62.5-62.5 163.8-62.5 226.3 0L386.3 160H352c-17.7 0-32 14.3-32 32s14.3 32 32 32H463.5c0 0 0 0 0 0h.4c17.7 0 32-14.3 32-32V80c0-17.7-14.3-32-32-32s-32 14.3-32 32v35.2L414.4 97.6c-87.5-87.5-229.3-87.5-316.8 0C73.2 122 55.6 150.7 44.8 181.4c-5.9 16.7 2.9 34.9 19.5 40.8s34.9-2.9 40.8-19.5zM39 289.3c-5 1.5-9.8 4.2-13.7 8.2c-4 4-6.7 8.8-8.1 14c-.3 1.2-.6 2.5-.8 3.8c-.3 1.7-.4 3.4-.4 5.1V432c0 17.7 14.3 32 32 32s32-14.3 32-32V396.9l17.6 17.5 0 0c87.5 87.4 229.3 87.4 316.7 0c24.4-24.4 42.1-53.1 52.9-83.7c5.9-16.7-2.9-34.9-19.5-40.8s-34.9 2.9-40.8 19.5c-7.7 21.8-20.2 42.3-37.8 59.8c-62.5 62.5-163.8 62.5-226.3 0l-.1-.1L125.6 352H160c17.7 0 32-14.3 32-32s-14.3-32-32-32H48.4c-1.6 0-3.2 .1-4.8 .3s-3.1 .5-4.6 1z"/></svg>
+            Total unactivated accounts
+        </div>
+    </div>
 </div>
 
 <div class="content-title">
@@ -117,7 +132,7 @@ $unactiveated_accounts = $pdo->query('SELECT * FROM accounts WHERE activation_co
             <tbody>
                 <?php if (!$accounts): ?>
                 <tr>
-                    <td colspan="20" class="no-results">There are no accounts.</td>
+                    <td colspan="20" class="no-results">There are no new accounts.</td>
                 </tr>
                 <?php endif; ?>
                 <?php foreach ($accounts as $account): ?>
@@ -471,7 +486,7 @@ $unactiveated_accounts = $pdo->query('SELECT * FROM accounts WHERE activation_co
                 <tbody>
                 <?php if (!$inactive_accounts_list): ?>
                     <tr>
-                        <td colspan="20" class="no-results">There are no inactive accounts.</td>
+                        <td colspan="20" class="no-results">There are no unactivated accounts.</td>
                     </tr>
                 <?php endif; ?>
                 <?php foreach ($unactiveated_accounts as $account): ?>
