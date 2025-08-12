@@ -15,11 +15,11 @@
                         <div class="col-6 col-md-2 mb-3">
                             <h5>About</h5>
                             <ul class="nav flex-column">
-                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
-                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Portfolio</a></li>
-                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Profile</a></li>
-                                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Contact</a></li>
+                                <li class="nav-item mb-2"><a href="/" class="nav-link p-0 text-body-secondary">Home</a></li>
+                                <li class="nav-item mb-2"><a href="about.php" class="nav-link p-0 text-body-secondary">About</a></li>
+                                <li class="nav-item mb-2"><a href="register.php" class="nav-link p-0 text-body-secondary">Register</a> </li>
+                                <li class="nav-item mb-2"><a href="profile.php" class="nav-link p-0 text-body-secondary">Profile</a></li>
+                                <li class="nav-item mb-2"><a href="contact.php" class="nav-link p-0 text-body-secondary">Contact</a></li>
                             </ul>
                         </div>
                         <div class="col-6 col-md-2 mb-3">
@@ -105,5 +105,9 @@
             setInterval(changeFavicon, 1000);
 
         </script>
+        <?php
+        // Flush the output buffer to ensure all content is sent to the browser
+        if (ob_get_level()) ob_end_flush();
+        ?>
     </body>
 </html>

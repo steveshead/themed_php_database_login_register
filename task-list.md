@@ -46,7 +46,7 @@
 4. **Enhance Error Messages**: Make error messages more user-friendly and descriptive.
 5. **Implement Progressive Form Completion**: Break long forms into steps.
 6. **Add Loading Indicators**: Show loading spinners during AJAX requests.
-7. **Fix Typos**: Correct "Police privacy" to "Privacy Policy" in login.php.
+7. ~~**Fix Typos**: Correct "Police privacy" to "Privacy Policy" in login.php.~~
 8. **Improve Social Media Integration**: Only show social media links if the user has provided handles.
 9. **Add Success Messages**: Show success messages after actions are completed.
 10. **Implement Remember Form Data**: Remember form data on validation errors.

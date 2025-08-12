@@ -1,5 +1,7 @@
 <?php
 // The main file contains the database connection, session initializing, and functions, other PHP files will depend on this file.
+// Start output buffering to prevent "headers already sent" errors
+ob_start();
 // Include the configuration file
 include_once 'config.php';
 // We need to use sessions, so you should always start sessions using the below code.

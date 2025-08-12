@@ -69,6 +69,8 @@ if (isset($_SESSION['first_name'])) {
                 <ul class="nav flex-column">
                     <li class="nav-item"><a class="nav-link py-2 text-uppercase <?= $current_file_name === 'index.php' ? 'active' : '' ?>" href="/">Home</a></li>
                     <li class="nav-item"><a class="nav-link py-2 text-uppercase <?= $current_file_name === 'about.php' ? 'active' : '' ?>" href="about.php">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link py-2 text-uppercase <?= $current_file_name === 'privacy-policy.php' ? 'active' : '' ?>" href="privacy-policy.php">Privacy Policy</a></li>
+                    <li class="nav-item"><a class="nav-link py-2 text-uppercase <?= $current_file_name === 'terms-and-conditions.php' ? 'active' : '' ?>" href="terms-and-conditions.php">Terms and Conditions</a></li>
                     <?php if ($logged_in): ?>
                     <li class="nav-item"><a class="nav-link py-2 text-uppercase <?= $current_file_name === 'profile.php' ? 'active' : '' ?>" href="profile.php">Profile</a></li>
                     <li class="nav-item"><a class="nav-link py-2 text-uppercase <?= $current_file_name === 'page.php' ? 'active' : '' ?>" href="page.php">Page</a></li>

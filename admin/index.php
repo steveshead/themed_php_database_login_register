@@ -484,7 +484,7 @@ $unactiveated_accounts = $pdo->query('SELECT * FROM accounts WHERE activation_co
                 </tr>
                 </thead>
                 <tbody>
-                <?php if (!$inactive_accounts_list): ?>
+                <?php if (!$unactiveated_accounts): ?>
                     <tr>
                         <td colspan="20" class="no-results">There are no unactivated accounts.</td>
                     </tr>

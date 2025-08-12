@@ -85,6 +85,11 @@ $_SESSION['token'] = hash('sha256', uniqid(rand(), true));
 
                         <div id="passwordStrength" class="passwordStrength" style="display: none;"></div>
 
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="terms" name="terms" required>
+                            <label class="form-check-label" for="terms">I agree to the <a href="terms-and-conditions.php" class="text-decoration-none">Terms and Conditions</a> and <a href="privacy-policy.php" class="text-decoration-none">Privacy Policy</a></label>
+                        </div>
+
                         <input type="hidden" name="token" value="<?=$_SESSION['token']?>">
                         <div class="msg"></div>
 

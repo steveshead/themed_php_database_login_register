@@ -236,7 +236,7 @@ if (isset($_POST['submit'])) {
       </section>
                         
       <section class="position-relative py-5 bg-primary" style="overflow: hidden; z-index: 1;">
-        <div class="container">
+        <div class="container mt-4">
           <div class="row">
             <div class="col-12 col-md-8 col-lg-6 mx-auto mb-4 text-center text-lg-left">
               <h2 class="mb-3 fs-1 text-white fw-bold">

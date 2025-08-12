@@ -115,7 +115,7 @@ if (isset($_GET['timeout']) && $_GET['timeout'] == 1) {
                         </button>
                     </a>
 
-                    <p class="mt-4" style="font-size:17px !important;"><a class="text-decoration-none" href="#">Police privacy</a> and <a class="text-decoration-none" href="#">Terms of Use</a></p>
+                    <p class="mt-4" style="font-size:17px !important;"><a class="text-decoration-none" href="privacy-policy.php">Privacy Policy</a> and <a class="text-decoration-none" href="terms-and-conditions.php">Terms of Use</a></p>
                 </div>
             </div>
 
