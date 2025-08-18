@@ -67,7 +67,8 @@
                         <a href="/">
                             <img src="assets/logos/novus/novus.png" height="36" alt="">
                         </a>
-                        <p class="copyright mt-2">&copy; Copyright <?=date('Y')?> Company, Inc. All rights reserved.</p>
+                        <p class="copyright mt-1">&copy; Copyright <?=date('Y')?> Company, Inc. All rights reserved.</p>
+                        <p class="mt-1" style="font-size:17px !important;"><a class="text-decoration-none text-muted" href="privacy-policy.php">Privacy Policy</a> | <a class="text-decoration-none text-muted" href="terms-and-conditions.php">Terms of Use</a></p>
                         <ul class="list-unstyled d-flex">
                             <li class="ms-3">
                                 <a class="link-body-emphasis" href="https://www.facebook.com/<?= isset($_SESSION['facebook']) ? htmlspecialchars($_SESSION['facebook'], ENT_QUOTES) : '' ?>" aria-label="Facebook">

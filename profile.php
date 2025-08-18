@@ -114,6 +114,7 @@ if (isset($_POST['username'], $_POST['npassword'], $_POST['cpassword'], $_POST['
                         </ul>
                         <div class="d-flex justify-content-center mb-2">
                             <a class="btn btn-primary me-1" href="?action=edit">Edit Profile</a>
+                            <a href="twofactor-setup.php" class="btn btn-outline-primary mx-1">2FA Settings</a>
                             <a href="logout.php" type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-primary ms-1">Logout</a>
                         </div>
                     </div>

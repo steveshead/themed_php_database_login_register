@@ -34,8 +34,12 @@ if ($account) {
 		} else if (account_approval && !$account['approved']) {
 			// The account is not approved
 			echo 'Error: Your account has not been approved yet!';
+        } else if ($account['totp_enabled'] == 1) {
+            // App-based two-factor authentication required
+            $_SESSION['tfa_id'] = $account['id'];
+            echo 'tfa: app-twofactor.php';
         } else if ($_SERVER['REMOTE_ADDR'] != $account['ip']) {
-            // Two-factor authentication required
+            // Email-based two-factor authentication required
             $_SESSION['tfa_id'] = $account['id'];
             echo 'tfa: twofactor.php';
 		} else {
