@@ -7,14 +7,14 @@
 4. ~~**Enhance Password Security**:~~
    ~~- Consider increasing minimum password length to 12 characters (Nope - min of 8 is enough with password complexity)~~
    ~~- Add password breach checking (via API like Have I Been Pwned) (NOPE - this app isn't yet big enouogh for that functionality)~~
-5. **Improve Two-Factor Authentication**:
-   - Make 2FA optional for users rather than only IP-based
-   - Consider adding app-based 2FA (like Google Authenticator)
+5. ~~**Improve Two-Factor Authentication**:~~
+   ~~- Make 2FA optional for users rather than only IP-based~~
+   ~~- Consider adding app-based 2FA (like Google Authenticator)~~
 6. **Implement Rate Limiting**: Add more comprehensive rate limiting beyond login attempts.
 7. **Add Security Headers**: Implement Content-Security-Policy, X-XSS-Protection, X-Content-Type-Options headers.
 8. **Secure Cookie Settings**: Add HttpOnly, Secure, and SameSite attributes to cookies.
 9. ~~**Implement Account Lockout**: After multiple failed login attempts, lock the account temporarily.~~
-10. **Add Privacy Policy**: Create a proper privacy policy page explaining data collection and storage.
+10.~~**Add Privacy Policy**: Create a proper privacy policy page explaining data collection and storage.~~
 
 ## Performance Improvements
 1. **Optimize Images**: Compress and properly size all images, especially the random images in the footer.
@@ -78,7 +78,7 @@
 9. **Implement Web Notifications**: Add browser notifications for important events.
 
 ## Feature Enhancements
-1. **Add User Roles and Permissions**: Implement more granular user roles beyond just Admin/Member.
+1. ~~**Add User Roles and Permissions**: Implement more granular user roles beyond just Admin/Member.~~
 2. **Implement Account Deletion**: Allow users to delete their accounts.
 3. **Add Email Preferences**: Let users choose which emails they receive.
 4. **Implement Activity Log**: Show users their recent account activity.
